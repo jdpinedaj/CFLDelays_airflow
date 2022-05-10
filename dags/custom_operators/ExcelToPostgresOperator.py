@@ -7,15 +7,13 @@ import os
 
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME')
 LOCATION_DATA = '/dags/data/'
-file_name = 'TRAIN_WAGON_100rows.xlsx'
-file_path = f"{AIRFLOW_HOME}{LOCATION_DATA}{file_name}"
 
 
 class ExcelToPostgresOperator(BaseOperator):
 
     @apply_defaults
     def __init__(self,
-                 sql=None,
+                 file_name=None,
                  target_table=None,
                  identifier=None,
                  postgres_conn_id='postgres_default',
@@ -23,19 +21,15 @@ class ExcelToPostgresOperator(BaseOperator):
                  **kwargs):
 
         super().__init__(*args, **kwargs)
-        self.sql = sql
+
+        self.file_name = file_name
         self.target_table = target_table
         self.identifier = identifier
         self.postgres_conn_id = postgres_conn_id
 
     def execute(self, context):
 
-        start_date = context['data_interval_start'].strftime(
-            '%Y-%m-%d %H:%M:%S')
-        end_date = context['data_interval_end'].strftime('%Y-%m-%d %H:%M:%S')
-
-        self.sql = self.sql.format(start_date=start_date, end_date=end_date)
-        print("sql", self.sql)
+        file_path = f"{AIRFLOW_HOME}{LOCATION_DATA}{self.file_name}"
 
         source = pd.read_excel(file_path)
         target = PostgresHook(self.postgres_conn_id)

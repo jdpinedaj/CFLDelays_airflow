@@ -133,7 +133,7 @@ create_train_wagon_table = PostgresOperator(
             DateH_maj VARCHAR NOT NULL,
             IDWAGON_MODELE VARCHAR NOT NULL,
             Top_wagon_maitre VARCHAR NOT NULL);
-        """.format(table_name='cfl.public.TRAIN_WAGON_100rows'),
+        """.format(table_name='cfl.public.train_wagon_100rows'),
     dag=dag,
 )
 
@@ -156,13 +156,8 @@ create_train_wagon_table = PostgresOperator(
 
 copying_train_wagon_table = ExcelToPostgresOperator(
     task_id='copying_train_wagon_table',
-    sql="""
-            DELETE IF EXISTS FROM train_wagon_100rows;
-            COPY train_wagon_100rows FROM '{file_path}' DELIMITER ',' CSV HEADER;
-            """.format(file_path=file_path_tmp('train_wagon_100rows.xlsx')),
     target_table='cfl.public.TRAIN_WAGON_100rows',
-    #file_path=file_path_tmp('TRAIN_WAGON_100rows.xlsx'),
-    #postgres_conn_id='postgres_default',
+    file_name='TRAIN_WAGON_100rows.xlsx',
     identifier='id',
     dag=dag,
 )
