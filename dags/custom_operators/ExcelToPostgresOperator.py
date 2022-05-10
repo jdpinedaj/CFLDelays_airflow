@@ -29,18 +29,32 @@ class ExcelToPostgresOperator(BaseOperator):
 
     def execute(self, context):
 
-        file_path = f"{AIRFLOW_HOME}{LOCATION_DATA}{self.file_name}"
+        self._get_data()
+        self._write_data()
 
-        source = pd.read_excel(file_path)
-        target = PostgresHook(self.postgres_conn_id)
+        print("Data loaded from Excel!")
 
-        target_fields = source.columns.tolist()
-        rows = source.values.tolist()
+    def _get_data(self):
 
-        target.insert_rows(self.target_table,
-                           rows,
-                           target_fields=target_fields,
-                           replace_index=self.identifier,
-                           replace=True)
+        _file_path = f"{AIRFLOW_HOME}{LOCATION_DATA}{self.file_name}"
+        self._source = pd.read_excel(_file_path)
 
-        print("Data loaded successfully!")
+    def _write_data(self):
+        if self._source is None:
+            raise Exception("There is no data")
+        self._write_sql()
+
+    def _write_sql(self):
+
+        _target = PostgresHook(self.postgres_conn_id)
+
+        _target_fields = self._source.columns.tolist()
+        _rows = self._source.values.tolist()
+
+        _target.insert_rows(self.target_table,
+                            _rows,
+                            target_fields=_target_fields,
+                            replace_index=self.identifier,
+                            replace=True)
+
+        print("Data loaded to Postgres!")
