@@ -1,0 +1,39 @@
+# data
+data/*
+!data/train_data_final.xlsx
+!data/incidents.xlsx
+!data/incident_concerne.xlsx
+predict/*
+!predict/data_to_predict.csv
+
+# notebooks
+notebooks/*
+!notebooks/*.ipynb
+*.ipynb_checkpoints
+
+# mlruns
+mlruns
+
+# cache
+scripts/__pycache__
+__pycache__
+
+# cloud keys
+cfl-streamlit_aws.pem
+cfl-streamlit_azure.pem
+
+# logs
+script_logs/*
+!script_logs/.gitkeep
+logs
+*.log
+
+# vscode
+.vscode
+
+# Scripts
+dags/scripts/*
+
+# others
+.idea
+requirements.txt
