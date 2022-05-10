@@ -10,8 +10,7 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from custom_operators.ExcelToPostgresOperator import ExcelToPostgresOperator
-from scripts.hello import hello
-from scripts.helper import some_work
+from scripts.creating_postgres_tables import creating_empty_tables
 import os
 import pandas as pd
 
@@ -48,13 +47,8 @@ date = datetime.now().strftime("%Y_%m_%d")
 # Functions
 
 
-def say_hello():
-    hello()
-
-
-def check_location_libraries():
-    some_work()
-    print("It is working!")
+def creating_tables():
+    creating_empty_tables()
 
 
 def file_path_tmp(file_name):
@@ -62,15 +56,16 @@ def file_path_tmp(file_name):
     return file_path_tmp
 
 
-# def excel_to_sql(file_name):
-#     file_path = f"{AIRFLOW_HOME}{LOCATION_DATA}{file_name}"
-#     df = pd.read_excel(file_path)
-#     new_name = f"{file_name.split('.')[0]}".lower()
-#     df.to_sql(new_name,
-#               schema='airflow',
-#               con=PostgresHook().get_conn(),
-#               if_exists='replace',
-#               index=False)
+# def generate_delete_tasks(tables_to_delete, dag):
+#     tasks = []
+#     for table in tables_to_delete:
+#         query = f"delete if exists {table}"
+#         task = ExcelToPostgresOperator(
+#             task_id=f"copying_{table}",
+#             target_table=f"cf1.public.{table.upper()}_100rows",
+#             dag=dag)
+#         tasks.append(task)
+#     return tasks
 
 #######################
 ## 3. Instantiate a DAG
@@ -90,19 +85,19 @@ dag = DAG(dag_id='JuanDP_DAG',
 
 #? 4.1. Starting pipeline
 
-start_pipeline = DummyOperator(task_id='start_pipeline', dag=dag)
-
-saying_hello = PythonOperator(
-    task_id='saying_hello',
-    python_callable=say_hello,
-    retries=2,
-    retry_delay=timedelta(seconds=15),
+start_pipeline = DummyOperator(
+    task_id='start_pipeline',
     dag=dag,
 )
 
-checking_location_libraries = PythonOperator(
-    task_id='checking_location_libraries',
-    python_callable=check_location_libraries,
+# delete_tasks = generate_delete_tasks(
+#     ['tabla1', 'tabla2'],
+#     dag=dag,
+# )
+
+creating_postgres_tables = PythonOperator(
+    task_id='creating_postgres_tables',
+    python_callable=creating_tables,
     retries=2,
     retry_delay=timedelta(seconds=15),
     dag=dag,
@@ -116,6 +111,7 @@ check_installed_libraries = BashOperator(
     dag=dag,
 )
 
+#? 4.2. Creating empty tables
 create_train_wagon_table = PostgresOperator(
     task_id="create_train_wagon_table",
     postgres_conn_id='postgres_default',
@@ -133,31 +129,52 @@ create_train_wagon_table = PostgresOperator(
             DateH_maj VARCHAR NOT NULL,
             IDWAGON_MODELE VARCHAR NOT NULL,
             Top_wagon_maitre VARCHAR NOT NULL);
-        """.format(table_name='cfl.public.train_wagon_100rows'),
+        """.format(table_name='cfl.public.train_wagon'),
     dag=dag,
 )
 
-# getting_train_wagon = PythonOperator(
-#     task_id='getting_train_wagon',
-#     python_callable=excel_to_sql,
-#     op_kwargs={'file_name': 'TRAIN_WAGON.xlsx'},
-#     retries=2,
-#     retry_delay=timedelta(seconds=15),
-#     dag=dag,
-# )
-# copy_from_train_wagon_table = PostgresOperator(
-#     task_id="copy_from_train_wagon_table",
-#     postgres_conn_id='postgres_default',
-#     sql="""
-#             COPY train_wagon FROM '{file_path}' DELIMITER ',' CSV HEADER;
-#         """.format(file_path=file_path_tmp('train_wagon.sql')),
-#     dag=dag,
-# )
+create_incident_concerne_table = PostgresOperator(
+    task_id="create_incident_concerne_table",
+    postgres_conn_id='postgres_default',
+    sql="""
+            DROP TABLE IF EXISTS {table_name};
+            CREATE TABLE IF NOT EXISTS {table_name} (
+            id SERIAL PRIMARY KEY,
+            IDINCIDENT_CONCERNE VARCHAR NOT NULL,
+            IDINCIDENT VARCHAR NOT NULL,
+            IDTRAIN_UTI VARCHAR NOT NULL,
+            IDTRAIN_WAGON VARCHAR NOT NULL,
+            IDUtilisateur_creation VARCHAR NOT NULL,
+            DateH_creation VARCHAR NOT NULL,
+            IDUtilisateur_maj VARCHAR NOT NULL,
+            DateH_maj VARCHAR NOT NULL,
+            Unite VARCHAR NOT NULL,
+            IDCOMMANDE_UTI VARCHAR NOT NULL,
+            IDAGRES VARCHAR NOT NULL,
+            IDFACTURE VARCHAR NOT NULL,
+            IDTRAIN_LOT VARCHAR NOT NULL,
+            IDWAGON VARCHAR NOT NULL,
+            Annule_TrainLot VARCHAR NOT NULL,
+            IDSOCIETE VARCHAR NOT NULL,
+            IDFACTURE_FOUR VARCHAR NOT NULL);
+        """.format(table_name='cfl.public.incident_concerne'),
+    dag=dag,
+)
 
-copying_train_wagon_table = ExcelToPostgresOperator(
-    task_id='copying_train_wagon_table',
-    target_table='cfl.public.TRAIN_WAGON_100rows',
-    file_name='TRAIN_WAGON_100rows.xlsx',
+#? 4.3. Populating tables
+
+populate_train_wagon_table = ExcelToPostgresOperator(
+    task_id='populate_train_wagon_table',
+    target_table='cfl.public.train_wagon',
+    file_name='TRAIN_WAGON.xlsx',
+    identifier='id',
+    dag=dag,
+)
+
+populate_incident_concerne_table = ExcelToPostgresOperator(
+    task_id='populate_incident_concerne_table',
+    target_table='cfl.public.incident_concerne',
+    file_name='INCIDENT_CONCERNE.xlsx',
     identifier='id',
     dag=dag,
 )
@@ -166,8 +183,14 @@ copying_train_wagon_table = ExcelToPostgresOperator(
 ## 5. Setting up dependencies
 #######################
 
-start_pipeline >> saying_hello
-saying_hello >> checking_location_libraries
-checking_location_libraries >> check_installed_libraries
-checking_location_libraries >> create_train_wagon_table
-create_train_wagon_table >> copying_train_wagon_table
+start_pipeline >> creating_postgres_tables
+
+creating_postgres_tables >> check_installed_libraries
+
+# Creating postgres tables
+creating_postgres_tables >> create_train_wagon_table
+creating_postgres_tables >> create_incident_concerne_table
+
+# Populating postgres tables
+create_train_wagon_table >> populate_train_wagon_table
+create_incident_concerne_table >> populate_incident_concerne_table
