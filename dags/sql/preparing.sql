@@ -104,8 +104,8 @@ SELECT CAST(NULLIF(Code_UIC, 'NaN') AS FLOAT) AS code_uic,
     CAST(NULLIF(IDGARE_Parent, 'NaN') AS FLOAT) AS id_gare_parent,
     CAST(NULLIF(Gare_Frontiere, 'NaN') AS FLOAT) AS gare_frontiere,
     CAST(NULLIF(Gare_Marchandises, 'NaN') AS FLOAT) AS gare_marchandises,
-    CAST(NULLIF(Latitude, 'NaN') AS FLOAT) AS latitude,
-    CAST(NULLIF(Longitude, 'NaN') AS FLOAT) AS longitude,
+    CAST(NULLIF(Latitude, 'NaN') AS DOUBLE PRECISION) AS latitude,
+    CAST(NULLIF(Longitude, 'NaN') AS DOUBLE PRECISION) AS longitude,
     CAST(NULLIF(Enr_actif, 'NaN') AS FLOAT) AS enr_actif,
     CAST(NULLIF(IDUtilisateur_creation, 'NaN') AS FLOAT) AS id_utilisateur_creation,
     CAST(NULLIF(DateH_creation, 'NaN') AS TIMESTAMP) AS dateH_creation,
@@ -290,8 +290,14 @@ station AS (
         code_pays AS Station_Country,
         id_gare_parent AS id_gare_parent_station,
         gare_frontiere AS gare_frontiere_station,
-        latitude AS Station_Latitude,
-        longitude AS Station_Longitude,
+        CASE
+            WHEN latitude = 0 THEN NULL
+            ELSE latitude
+        END AS Station_Latitude,
+        CASE
+            WHEN longitude = 0 THEN NULL
+            ELSE longitude
+        END AS Station_Longitude,
         id_utilisateur_creation AS id_utilisateur_creation_station,
         dateH_creation AS dateH_creation_station,
         id_utilisateur_maj AS id_utilisateur_maj_station,
@@ -308,7 +314,7 @@ FROM train_jalon
 DROP TABLE IF EXISTS public_processed.train_od;
 CREATE TABLE IF NOT EXISTS public_processed.train_od AS WITH origin AS (
     SELECT id_train_jalon_train_jalon AS id_train_jalon_origin,
-        jalon_num_train_jalon AS jalon_num_origin,
+        Station_Order AS jalon_num_origin,
         Actual_Arrival AS hr_arrivee_origin,
         Planned_Arrival AS dht_arrivee_origin,
         Planned_Departure AS Planned_Departure,
@@ -364,11 +370,11 @@ CREATE TABLE IF NOT EXISTS public_processed.train_od AS WITH origin AS (
         top_everysens_existe_station AS top_everysens_existe_station_origin,
         geojson_station AS geojson_station_origin
     FROM public_processed.stations_data
-    WHERE jalon_num_train_jalon = '1'
+    WHERE Station_Order = '1'
 ),
 destination AS (
     SELECT id_train_jalon_train_jalon AS id_train_jalon_destination,
-        jalon_num_train_jalon AS jalon_num_destination,
+        Station_Order AS jalon_num_destination,
         Actual_Arrival AS Actual_Arrival,
         Planned_Arrival AS Planned_Arrival,
         Planned_Departure AS dht_depart_destination,
@@ -424,7 +430,7 @@ destination AS (
         top_everysens_existe_station AS top_everysens_existe_station_destination,
         geojson_station AS geojson_station_destination
     FROM public_processed.stations_data
-    WHERE jalon_num_train_jalon = '9999'
+    WHERE Station_Order = '9999'
 )
 SELECT *
 FROM origin
@@ -484,27 +490,150 @@ FROM(
     ) AS train_data_initial
     RIGHT JOIN public_processed.train_od ON train_data_initial.IDTRAIN = public_processed.train_od.id_train_origin;
 --! Creating station_data_stops table
-SELECT id_train_train_jalon AS id_train,
-    id_gare_train_jalon AS id_gare,
-    Station_Order,
-    Station_Name,
-    Station_Country,
-    Station_Latitude,
-    Station_Longitude,
-    Actual_Arrival,
-    Planned_Arrival,
-    LAG(planned_arrival) OVER (
-        PARTITION BY id_train_train_jalon
-        ORDER BY planned_arrival ASC
-    ) Previous_planned_arrival,
-    DATE_PART('minute', Actual_Arrival - Planned_Arrival) AS Arrival_Variance,
-    Actual_Departure,
-    Planned_Departure,
-    LAG(Planned_Departure) OVER (
-        PARTITION BY id_train_train_jalon
-        ORDER BY Planned_Departure ASC
-    ) Previous_planned_arrival,
-    DATE_PART('minute', Actual_Departure - Planned_Departure) AS Depart_Variance
-FROM public_processed.stations_data --WHERE Station_Order NOT IN (1, 9999) --? TODO: CHECK why William emoved those two rows
+WITH planned_arrival AS (
+    SELECT id_train_train_jalon AS id_train,
+        id_gare_train_jalon AS id_gare,
+        Station_Order,
+        Station_Name,
+        Station_Country,
+        Station_Latitude,
+        Station_Longitude,
+        Actual_Arrival,
+        Actual_Departure,
+        'Planned_Arrival' AS Schedule,
+        Planned_Arrival AS Plan_Timestamp --! TODO: FIX PLAN_TIMESTAMP
+    FROM public_processed.stations_data
+    WHERE Station_Order <> 1
+),
+planned_departure AS (
+    SELECT id_train_train_jalon AS id_train,
+        id_gare_train_jalon AS id_gare,
+        Station_Order,
+        Station_Name,
+        Station_Country,
+        Station_Latitude,
+        Station_Longitude,
+        Actual_Arrival,
+        Actual_Departure,
+        'Planned_Departure' AS Schedule,
+        Planned_Departure AS Plan_Timestamp
+    FROM public_processed.stations_data
+    WHERE Station_Order <> 9999
+),
+scheduled AS (
+    SELECT *
+    FROM planned_arrival
+    UNION ALL
+    SELECT *
+    FROM planned_departure
+),
+timestamp_order AS (
+    SELECT *,
+        ROW_NUMBER() OVER (
+            PARTITION BY id_train
+            ORDER BY plan_timestamp,
+                schedule ASC
+        ) -1 AS Timestamp_Order,
+        CASE
+            WHEN Schedule = 'Planned_Arrival' THEN (Actual_Arrival - Plan_Timestamp)
+            ELSE NULL
+        END AS Arrive_Variance,
+        CASE
+            WHEN Schedule = 'Planned_Departure' THEN (Actual_Departure - Plan_Timestamp)
+            ELSE NULL
+        END AS Depart_Variance,
+        CASE
+            WHEN Actual_Arrival IS NOT NULL THEN Actual_Arrival
+            ELSE Actual_Departure
+        END AS Actual_Timestamp
+    FROM scheduled
+),
+times_from_prior AS (
+    SELECT *,
+        Plan_Timestamp - LAG(Plan_Timestamp) OVER (
+            PARTITION BY id_train
+            ORDER BY Timestamp_Order
+        ) AS Time_From_Prior_Planned,
+        Actual_Timestamp - LAG(Actual_Timestamp) OVER (
+            PARTITION BY id_train
+            ORDER BY Timestamp_Order
+        ) AS Time_From_Prior_Actual,
+        EXTRACT(
+            EPOCH
+            FROM(Depart_Variance) / 60
+        ) AS Depart_Variance_Mins,
+        EXTRACT(
+            EPOCH
+            FROM(Arrive_Variance) / 60
+        ) AS Arrive_Variance_Mins
+    FROM timestamp_order
+),
+time_from_prior_plan_mins AS (
+    SELECT *,
+        EXTRACT(
+            EPOCH
+            FROM(Time_From_Prior_Planned)
+        ) / 60 AS Time_From_Prior_Plan_Mins,
+        EXTRACT(
+            EPOCH
+            FROM(Time_From_Prior_Actual)
+        ) / 60 AS Time_From_Prior_Actual_Mins
+    FROM times_from_prior
+),
+time_from_priors AS(
+    SELECT *,
+        CASE
+            WHEN Schedule = 'Planned_Arrival' THEN Time_From_Prior_Plan_Mins
+            ELSE NULL
+        END AS Travel_Time_Mins,
+        CASE
+            WHEN Schedule = 'Planned_Departure' THEN Time_From_Prior_Plan_Mins
+            ELSE NULL
+        END AS Idle_Time_Mins
+    FROM time_from_prior_plan_mins
+),
+-- distance between stations in Kilometers using Haversine in Postgresql casting longitude and latitude
+distances AS (
+    SELECT *,
+        SQRT(
+            POW(
+                69.1 * (
+                    Station_Latitude - LAG(Station_Latitude) OVER (
+                        PARTITION BY id_train
+                        ORDER BY Station_Order
+                    )
+                ),
+                2
+            ) + POW(
+                69.1 * (
+                    LAG(Station_Longitude) OVER (
+                        PARTITION BY id_train
+                        ORDER BY Station_Order
+                    ) - Station_Longitude
+                ) * COS(Station_Latitude / 57.3),
+                2
+            )
+        ) AS KM_Distance_Event
+    FROM time_from_priors
+),
+events_actualtimestampvalid AS(
+    SELECT *,
+        SUM(KM_Distance_Event) OVER (
+            PARTITION BY id_train
+            ORDER BY Station_Order
+        ) AS Cumm_Distance_KM,
+        CASE
+            WHEN Time_From_Prior_Plan_Mins IS NULL THEN NULL
+            ELSE KM_Distance_Event / (Time_From_Prior_Plan_Mins / 60)
+        END AS KM_HR_Event --! TODO: ARREGLAR PROBLEMA DIVISION POR 0 EN KM_HR_Event,
+        CASE
+            WHEN Actual_Timestamp IS NOT NULL THEN 1
+            ELSE 0
+        END AS Actual_Timestamp_Valid
+    FROM distances
+)
+SELECT *
+FROM events_actualtimestampvalid -- WHERE id_train = 9544
 ORDER BY id_train,
-    Station_Order;
+    Station_Order,
+    Schedule;
