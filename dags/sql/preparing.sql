@@ -236,7 +236,12 @@ wagon_modele AS (
 SELECT *
 FROM train_wagon
     LEFT JOIN wagon ON train_wagon.id_wagon_train_wagon = wagon.id_wagon_wagon
-    LEFT JOIN wagon_modele ON wagon.id_wagon_modele_wagon = wagon_modele.id_wagon_modele_wagon_modele;
+    LEFT JOIN wagon_modele ON train_wagon.id_wagon_modele_train_wagon = wagon_modele.id_wagon_modele_wagon_modele;
+-------
+SELECT *
+FROM public_processed.wagon_data
+ORDER BY id_train_wagon_train_wagon ASC
+LIMIT 20;
 --! Creating stations_data table
 DROP TABLE IF EXISTS public_processed.stations_data;
 CREATE TABLE IF NOT EXISTS public_processed.stations_data AS WITH train_jalon AS (
@@ -489,8 +494,13 @@ FROM(
         ORDER BY IDTRAIN
     ) AS train_data_initial
     RIGHT JOIN public_processed.train_od ON train_data_initial.IDTRAIN = public_processed.train_od.id_train_origin;
+--------
+SELECT *
+FROM public_processed.train_data
+WHERE idtrain = 18711;
 --! Creating station_data_stops table
-WITH planned_arrival AS (
+DROP TABLE IF EXISTS public_processed.station_data_stops;
+CREATE TABLE public_processed.station_data_stops AS WITH planned_arrival AS (
     SELECT id_train_train_jalon AS id_train,
         id_gare_train_jalon AS id_gare,
         Station_Order,
@@ -501,7 +511,7 @@ WITH planned_arrival AS (
         Actual_Arrival,
         Actual_Departure,
         'Planned_Arrival' AS Schedule,
-        Planned_Arrival AS Plan_Timestamp --! TODO: FIX PLAN_TIMESTAMP
+        Planned_Arrival AS Plan_Timestamp
     FROM public_processed.stations_data
     WHERE Station_Order <> 1
 ),
@@ -568,16 +578,19 @@ times_from_prior AS (
         ) AS Arrive_Variance_Mins
     FROM timestamp_order
 ),
-time_from_prior_plan_mins AS (
+time_from_prior_plan_mins_table AS (
     SELECT *,
         EXTRACT(
             EPOCH
             FROM(Time_From_Prior_Planned)
         ) / 60 AS Time_From_Prior_Plan_Mins,
-        EXTRACT(
-            EPOCH
-            FROM(Time_From_Prior_Actual)
-        ) / 60 AS Time_From_Prior_Actual_Mins
+        CASE
+            WHEN Timestamp_Order = 0 THEN Depart_Variance_Mins --? TODO: Apparently this is not working properly in William's process
+            ELSE EXTRACT(
+                EPOCH
+                FROM(Time_From_Prior_Actual)
+            ) / 60
+        END AS Time_From_Prior_Actual_Mins
     FROM times_from_prior
 ),
 time_from_priors AS(
@@ -589,29 +602,42 @@ time_from_priors AS(
         CASE
             WHEN Schedule = 'Planned_Departure' THEN Time_From_Prior_Plan_Mins
             ELSE NULL
-        END AS Idle_Time_Mins
-    FROM time_from_prior_plan_mins
+        END AS Idle_Time_Mins,
+        SUM(Time_From_Prior_Plan_Mins) OVER (
+            PARTITION BY id_train
+            ORDER BY Timestamp_Order
+        ) AS Cumm_Schedule_Mins,
+        SUM(Time_From_Prior_Actual_Mins) OVER (
+            PARTITION BY id_train
+            ORDER BY Timestamp_Order
+        ) AS Cumm_Actual_Mins
+    FROM time_from_prior_plan_mins_table
 ),
 -- distance between stations in Kilometers using Haversine in Postgresql casting longitude and latitude
 distances AS (
     SELECT *,
-        SQRT(
-            POW(
-                69.1 * (
-                    Station_Latitude - LAG(Station_Latitude) OVER (
+        6371 * acos(
+            cos(radians(Station_Latitude)) * cos(
+                radians(
+                    LAG(Station_Latitude) OVER (
                         PARTITION BY id_train
                         ORDER BY Station_Order
                     )
-                ),
-                2
-            ) + POW(
-                69.1 * (
+                )
+            ) * cos(
+                radians(
                     LAG(Station_Longitude) OVER (
                         PARTITION BY id_train
                         ORDER BY Station_Order
-                    ) - Station_Longitude
-                ) * COS(Station_Latitude / 57.3),
-                2
+                    )
+                ) - radians(Station_Longitude)
+            ) + sin(radians(Station_Latitude)) * sin(
+                radians(
+                    LAG(Station_Latitude) OVER (
+                        PARTITION BY id_train
+                        ORDER BY Station_Order
+                    )
+                )
             )
         ) AS KM_Distance_Event
     FROM time_from_priors
@@ -620,20 +646,109 @@ events_actualtimestampvalid AS(
     SELECT *,
         SUM(KM_Distance_Event) OVER (
             PARTITION BY id_train
-            ORDER BY Station_Order
+            ORDER BY Timestamp_Order
         ) AS Cumm_Distance_KM,
-        CASE
-            WHEN Time_From_Prior_Plan_Mins IS NULL THEN NULL
-            ELSE KM_Distance_Event / (Time_From_Prior_Plan_Mins / 60)
-        END AS KM_HR_Event --! TODO: ARREGLAR PROBLEMA DIVISION POR 0 EN KM_HR_Event,
+        KM_Distance_Event / NULLIF(Time_From_Prior_Plan_Mins / 60, 0) AS KM_HR_Event,
         CASE
             WHEN Actual_Timestamp IS NOT NULL THEN 1
             ELSE 0
         END AS Actual_Timestamp_Valid
     FROM distances
+),
+station_data_actuals AS (
+    SELECT id_train,
+        AVG(Actual_Timestamp_Valid) AS Actual_Timestamp_Perc
+    FROM events_actualtimestampvalid
+    GROUP BY id_train
+),
+aggregating_data_actuals AS (
+    SELECT events_actualtimestampvalid.*,
+        station_data_actuals.Actual_Timestamp_Perc AS Actual_Timestamp_Perc
+    FROM events_actualtimestampvalid
+        LEFT JOIN station_data_actuals ON events_actualtimestampvalid.id_train = station_data_actuals.id_train
 )
 SELECT *
-FROM events_actualtimestampvalid -- WHERE id_train = 9544
+FROM aggregating_data_actuals
+ORDER BY id_train,
+    Station_Order,
+    Schedule;
+----------
+SELECT *
+FROM public_processed.station_data_stops
+WHERE id_train = 263;
+--! Creating station_data_agg table
+DROP TABLE IF EXISTS public_processed.station_data_agg;
+CREATE TABLE public_processed.station_data_agg AS WITH aggregated_data AS (
+    SELECT id_train,
+        MIN(Origin_Station) AS Origin_Station,
+        MAX(Destination_Station) AS Destination_Station,
+        SUM(KM_Distance_Event) AS Train_Distance_KM,
+        SUM(Time_From_Prior_Plan_Mins) AS Train_Total_Time_Mins,
+        SUM(Travel_Time_Mins) AS Train_Travel_Time_Mins,
+        SUM(Idle_Time_Mins) AS Train_Idle_Time_Mins,
+        MAX(
+            CASE
+                WHEN Station_Order = 1 THEN Depart_Variance_Mins
+                ELSE NULL
+            END
+        ) AS Train_Depart_Variance_Mins,
+        MAX(
+            CASE
+                WHEN Station_Order = 9999 THEN Arrive_Variance_Mins
+                ELSE NULL
+            END
+        ) AS Train_Arrive_Variance_Mins
+    FROM (
+            SELECT id_train,
+                KM_Distance_Event,
+                Time_From_Prior_Plan_Mins,
+                Travel_Time_Mins,
+                Idle_Time_Mins,
+                timestamp_order,
+                Depart_Variance_Mins,
+                Arrive_Variance_Mins,
+                Station_Order,
+                CASE
+                    WHEN Station_Order = 1 THEN Station_Name
+                    ELSE NULL
+                END AS Origin_Station,
+                CASE
+                    WHEN Station_Order = 9999 THEN Station_Name
+                    ELSE NULL
+                END AS Destination_Station
+            FROM public_processed.station_data_stops
+        ) t0
+    GROUP BY id_train
+),
+aggregating_speeds AS (
+    SELECT *,
+        Train_Distance_KM / NULLIF(Train_Travel_Time_Mins / 60, 0) AS Travel_KM_HR,
+        Train_Distance_KM / NULLIF(Train_Total_Time_Mins / 60, 0) AS Total_KM_HR
+    FROM aggregated_data
+)
+SELECT *
+FROM aggregating_speeds
+ORDER BY id_train;
+----------
+SELECT *
+FROM public_processed.station_data_agg
+LIMIT 20;
+--! Creating final station_data table
+DROP TABLE IF EXISTS public_processed.station_data;
+CREATE TABLE public_processed.station_data AS
+SELECT station_data_stops.*,
+    station_data_agg.Origin_Station,
+    station_data_agg.Destination_Station,
+    station_data_agg.Train_Distance_KM,
+    station_data_agg.Train_Total_Time_Mins,
+    station_data_agg.Train_Travel_Time_Mins,
+    station_data_agg.Train_Idle_Time_Mins,
+    station_data_agg.Train_Depart_Variance_Mins,
+    station_data_agg.Train_Arrive_Variance_Mins,
+    station_data_agg.Travel_KM_HR,
+    station_data_agg.Total_KM_HR
+FROM public_processed.station_data_stops
+    LEFT JOIN public_processed.station_data_agg ON station_data_stops.id_train = station_data_agg.id_train
 ORDER BY id_train,
     Station_Order,
     Schedule;
