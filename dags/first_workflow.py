@@ -32,6 +32,7 @@ default_args = {
 SCHEDULE_INTERVAL = '@once'
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME')
 LOCATION_DATA = '/dags/data/'
+LOCATION_QUERIES = '/dags/data/'
 
 #* Those values are needed to create the connection to the Postgres database in the airflow UI
 # conn = Connection(conn_id='postgres_default',
@@ -72,13 +73,16 @@ def file_path_tmp(file_name):
 ## 3. Instantiate a DAG
 #######################
 
-dag = DAG(dag_id='JuanDP_DAG',
-          description='This is a DAG for JuanDP',
-          start_date=datetime.now(),
-          schedule_interval=SCHEDULE_INTERVAL,
-          concurrency=5,
-          max_active_runs=1,
-          default_args=default_args)
+dag = DAG(
+    dag_id='JuanDP_DAG',
+    description='This is a DAG for JuanDP',
+    start_date=datetime.now(),
+    schedule_interval=SCHEDULE_INTERVAL,
+    concurrency=5,
+    #!TODO: Apparently the template_searchpath is to be used to specify the location of the templates
+    template_searchpath=f"{AIRFLOW_HOME}{LOCATION_QUERIES}",
+    max_active_runs=1,
+    default_args=default_args)
 
 #######################
 ##! 4. Tasks
@@ -141,6 +145,15 @@ create_incident_concerne_table = PostgresOperator(
         """.format(table_name='cfl.public.incident_concerne'),
     dag=dag,
 )
+
+#! TODO: Put the queries in independent files.
+# create_incident_concerne_table = PostgresOperator(
+#     task_id="create_incident_concerne_table",
+#     postgres_conn_id='postgres_default',
+#     sql='create_incident_concerne_table.sql',
+#     params={'table_name': 'cfl.public.incident_concerne'},
+#     dag=dag,
+# )
 
 create_incidents_table = PostgresOperator(
     task_id="create_incidents_table",
