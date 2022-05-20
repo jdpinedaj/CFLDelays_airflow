@@ -165,23 +165,68 @@ FROM (
         FROM public.train_jalon
         ORDER BY IDTRAIN_JALON
     ) train_jalon;
+-- incident_concerne
+DROP TABLE IF EXISTS public_processed.incident_concerne;
+CREATE TABLE IF NOT EXISTS public_processed.incident_concerne AS
+SELECT CAST(NULLIF(IDINCIDENT_CONCERNE, 'NaN') AS FLOAT) AS id_incident_concerne,
+    CAST(NULLIF(IDINCIDENT, 'NaN') AS FLOAT) AS id_incident,
+    CAST(NULLIF(IDTRAIN_UTI, 'NaN') AS FLOAT) AS id_train_uti,
+    CAST(NULLIF(IDTRAIN_WAGON, 'NaN') AS FLOAT) AS id_train_wagon,
+    CAST(NULLIF(IDUtilisateur_creation, 'NaN') AS FLOAT) AS id_utilisateur_creation,
+    CAST(NULLIF(DateH_creation, 'NaN') AS TIMESTAMP) AS dateH_creation,
+    CAST(NULLIF(IDUtilisateur_maj, 'NaN') AS FLOAT) AS id_utilisateur_maj,
+    CAST(NULLIF(DateH_maj, 'NaN') AS TIMESTAMP) AS dateH_maj,
+    CAST(NULLIF(Unite, 'NaN') AS VARCHAR) AS unite,
+    CAST(NULLIF(IDCOMMANDE_UTI, 'NaN') AS FLOAT) AS id_commande_uti,
+    CAST(NULLIF(IDAGRES, 'NaN') AS FLOAT) AS id_agres,
+    CAST(NULLIF(IDFACTURE, 'NaN') AS FLOAT) AS id_facture,
+    CAST(NULLIF(IDTRAIN_LOT, 'NaN') AS FLOAT) AS id_train_lot,
+    CAST(NULLIF(IDWAGON, 'NaN') AS FLOAT) AS id_wagon,
+    CAST(NULLIF(Annule_TrainLot, 'NaN') AS FLOAT) AS annule_trainlot,
+    CAST(NULLIF(IDSOCIETE, 'NaN') AS FLOAT) AS id_societe,
+    CAST(NULLIF(IDFACTURE_FOUR, 'NaN') AS FLOAT) AS id_facture_four
+FROM public.incident_concerne;
+-- incidents
+DROP TABLE IF EXISTS public_processed.incidents;
+CREATE TABLE IF NOT EXISTS public_processed.incidents AS
+SELECT CAST(NULLIF(IDINCIDENT, 'NaN') AS FLOAT) AS id_incident,
+    CAST(NULLIF(Type_incident, 'NaN') AS VARCHAR) AS type_incident,
+    CAST(NULLIF(IDINCIDENT_Pere, 'NaN') AS FLOAT) AS id_incident_pere,
+    CAST(NULLIF(IDUtilisateur_creation, 'NaN') AS FLOAT) AS id_utilisateur_creation,
+    CAST(NULLIF(DateH_creation, 'NaN') AS TIMESTAMP) AS dateH_creation,
+    CAST(NULLIF(IDUtilisateur_maj, 'NaN') AS FLOAT) AS id_utilisateur_maj,
+    CAST(NULLIF(DateH_maj, 'NaN') AS TIMESTAMP) AS dateH_maj,
+    CAST(NULLIF(DateH_incident, 'NaN') AS TIMESTAMP) AS dateH_incident,
+    CAST(NULLIF(Lieu, 'NaN') AS VARCHAR) AS lieu,
+    CAST(NULLIF(Num_incident, 'NaN') AS FLOAT) AS num_incident,
+    CAST(NULLIF(Commentaire, 'NaN') AS VARCHAR) AS commentaire,
+    CAST(NULLIF(Statut, 'NaN') AS FLOAT) AS statut,
+    CAST(NULLIF(Gravite, 'NaN') AS FLOAT) AS gravite,
+    CAST(NULLIF(Motif_client, 'NaN') AS VARCHAR) AS motif_client,
+    CAST(NULLIF(IDGARE, 'NaN') AS FLOAT) AS id_gare,
+    CAST(NULLIF(Statut_commercial, 'NaN') AS FLOAT) AS statut_commercial,
+    CAST(NULLIF(Statut_financier, 'NaN') AS FLOAT) AS statut_financier
+FROM public.incidents;
 --! WAGON_DATA table
---! TODO: CHECK THE ID_TRAIN_LOT!!!!!
 DROP TABLE IF EXISTS public_processed.wagon_data;
 CREATE TABLE IF NOT EXISTS public_processed.wagon_data AS WITH train_wagon AS (
-    SELECT CAST(NULLIF(IDTRAIN_LOT, 'NaN') AS FLOAT) AS id_train_lot_train_wagon,
+    SELECT --* IDTRAIN_LOT
+        CAST(NULLIF(IDTRAIN_LOT, 'NaN') AS FLOAT) AS id_train_lot_train_wagon,
         CAST(NULLIF(IDTRAIN_WAGON, 'NaN') AS FLOAT) AS id_train_wagon_train_wagon,
+        --* IDWAGON
         CAST(NULLIF(IDWAGON, 'NaN') AS FLOAT) AS id_wagon_train_wagon,
         CAST(NULLIF(Num_Position, 'NaN') AS FLOAT) AS Wagon_Order,
         CAST(NULLIF(IDUtilisateur_creation, 'NaN') AS FLOAT) AS id_utilisateur_creation_train_wagon,
         CAST(NULLIF(DateH_creation, 'NaN') AS TIMESTAMP) AS dateH_creation_train_wagon,
         CAST(NULLIF(IDUtilisateur_maj, 'NaN') AS FLOAT) AS id_utilisateur_maj_train_wagon,
         CAST(NULLIF(DateH_maj, 'NaN') AS TIMESTAMP) AS dateH_maj_train_wagon,
+        --* IDWAGON_MODELE
         CAST(NULLIF(IDWAGON_MODELE, 'NaN') AS FLOAT) AS id_wagon_modele_train_wagon
     FROM public.train_wagon
 ),
 wagon AS (
-    SELECT CAST(NULLIF(IDWAGON, 'NaN') AS FLOAT) AS id_wagon_wagon,
+    SELECT --* IDWAGON
+        CAST(NULLIF(IDWAGON, 'NaN') AS FLOAT) AS id_wagon_wagon,
         CAST(NULLIF(Code_wagon, 'NaN') AS VARCHAR) AS code_wagon_wagon,
         CAST(NULLIF(IDGARE_actuelle, 'NaN') AS FLOAT) AS id_gare_actuelle_wagon,
         CAST(NULLIF(Frein_regime, 'NaN') AS VARCHAR) AS frein_regime_wagon,
@@ -214,7 +259,8 @@ wagon AS (
     FROM public.wagon
 ),
 wagon_modele AS (
-    SELECT CAST(NULLIF(IDWAGON_MODELE, 'NaN') AS FLOAT) AS id_wagon_modele_wagon_modele,
+    SELECT --* IDWAGON_MODELE
+        CAST(NULLIF(IDWAGON_MODELE, 'NaN') AS FLOAT) AS id_wagon_modele_wagon_modele,
         CAST(NULLIF(Modele_wagon, 'NaN') AS VARCHAR) AS modele_wagon_wagon_modele,
         CAST(NULLIF(Caracteristiques, 'NaN') AS VARCHAR) AS caracteristiques_wagon_modele,
         CAST(NULLIF(Type_wagon, 'NaN') AS VARCHAR) AS Wagon_Type,
@@ -254,10 +300,9 @@ FROM train_wagon
     LEFT JOIN wagon ON train_wagon.id_wagon_train_wagon = wagon.id_wagon_wagon
     LEFT JOIN wagon_modele ON train_wagon.id_wagon_modele_train_wagon = wagon_modele.id_wagon_modele_wagon_modele;
 -------
---! TODO: There is a problem with id_train_lot.... is not taking all values from 255 to 25XXX. REVISARRR!
 DROP TABLE IF EXISTS public_processed.wagon_data_unstack;
 CREATE TABLE IF NOT EXISTS public_processed.wagon_data_unstack AS WITH wagon_data_to_unstack AS (
-    SELECT id_train_lot_train_wagon,
+    SELECT id_train_lot_train_wagon AS idtrain_lot,
         Wagon_Order,
         id_wagon_train_wagon,
         modele_wagon_wagon_modele,
@@ -270,7 +315,7 @@ CREATE TABLE IF NOT EXISTS public_processed.wagon_data_unstack AS WITH wagon_dat
     ORDER BY id_train_lot_train_wagon,
         Wagon_Order
 ) -- unstacking_data will change depending on max value of Wagon_Order (now is 35)
-SELECT id_train_lot_train_wagon AS idtrain_lot,
+SELECT idtrain_lot,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN id_wagon_train_wagon
@@ -1532,8 +1577,8 @@ SELECT id_train_lot_train_wagon AS idtrain_lot,
         END
     ) AS "Wagon_Start_Date_35"
 FROM wagon_data_to_unstack
-GROUP BY id_train_lot_train_wagon
-ORDER BY id_train_lot_train_wagon; 
+GROUP BY idtrain_lot
+ORDER BY idtrain_lot;
 -----
 SELECT *
 FROM public_processed.wagon_data_unstack
@@ -1852,7 +1897,10 @@ FROM public_processed.station_data_agg
 LIMIT 20;
 --* Creating final station_data table
 DROP TABLE IF EXISTS public_processed.station_data;
-CREATE TABLE public_processed.station_data AS WITH aggregating_station_data AS (
+CREATE TABLE public_processed.station_data AS WITH my_constants (start_date, end_date) AS (
+    values('2019-11-01', '2021-04-06')
+),
+aggregating_station_data AS (
     SELECT station_data_stops.id_train,
         station_data_stops.id_gare,
         station_data_stops.Station_Order,
@@ -1920,7 +1968,10 @@ o_d AS(
             ' | ',
             Destination_Station
         ) AS OD_Pair
-    FROM aggregating_station_data
+    FROM aggregating_station_data,
+        my_constants
+    WHERE Planned_Departure_Date >= start_date
+        AND Planned_Departure_Date <= end_date
 ),
 arcs AS (
     SELECT *,
@@ -1996,17 +2047,13 @@ variances_bins AS (
             ELSE 0
         END AS Destination_Station_Bin
     FROM arcs
+    WHERE Arc NOT IN ('Valenton', 'Barcelona')
 )
 SELECT *
 FROM variances_bins
 ORDER BY id_train,
     Station_Order,
     Schedule;
---------
-SELECT Station_Order,
-    Origin_Station_Bin,
-    Destination_Station_Bin
-FROM public_processed.station_data;
 --! TRAIN_DATA TABLE
 --* Creating train_od table
 DROP TABLE IF EXISTS public_processed.train_od;
@@ -2232,6 +2279,7 @@ variances_bins AS (
                     FROM(Arrive_Variance) / 60
                 ) AS Arrive_Variance_Mins
             FROM arcs
+            WHERE Arc NOT IN ('Valenton', 'Barcelona')
         ) t0
 ),
 calendar_feats AS(
@@ -2296,9 +2344,9 @@ FROM (
             LEFT JOIN public_processed.train ON train_lot.id_train = public_processed.train.id_train
             LEFT JOIN public_processed.train_etape ON public_processed.train_lot.id_train_lot = public_processed.train_etape.id_train_lot
     ) t0;
---* Creating train_data table
-DROP TABLE IF EXISTS public_processed.train_data;
-CREATE TABLE public_processed.train_data AS WITH advanced_train_data AS (
+--* Creating train_data_final table
+DROP TABLE IF EXISTS public_processed.train_data_final;
+CREATE TABLE public_processed.train_data_final AS WITH advanced_train_data AS (
     SELECT *
     FROM(
             SELECT DISTINCT ON (IDTRAIN) *
@@ -3559,7 +3607,38 @@ station_data_unstack AS (
     FROM station_data_to_unstack
     GROUP BY id_train
 )
-SELECT advanced_train_data.*,
+SELECT --advanced_train_data.IDTRAIN_LOT,
+    --advanced_train_data.IDTRAIN,
+    advanced_train_data.lot_num_data_init,
+    advanced_train_data.nom_lot_data_init,
+    advanced_train_data.Journey_Distance,
+    advanced_train_data.weight_co2,
+    advanced_train_data.IDTRAIN_JALON_origin,
+    advanced_train_data.IDTRAIN_JALON_destination,
+    advanced_train_data.dateH_creation_data_init,
+    advanced_train_data.dateH_maj_data_init,
+    advanced_train_data.train_position_data_init,
+    advanced_train_data.incoterm_data_init,
+    advanced_train_data.nbre_teu_data_init,
+    advanced_train_data.capacite_teu_data_init,
+    advanced_train_data.Train_Weight,
+    advanced_train_data.Train_Length,
+    advanced_train_data.dateH_suppression_data_init,
+    advanced_train_data.Cancellation_Reason,
+    advanced_train_data.train_num_data_init,
+    advanced_train_data.id_relation_data_init,
+    advanced_train_data.sens_data_init,
+    advanced_train_data.Max_Weight,
+    advanced_train_data.Max_Length,
+    advanced_train_data.id_train_parent_data_init,
+    advanced_train_data.id_train_etape_data_init,
+    advanced_train_data.type_etape_data_init,
+    advanced_train_data.dh_theorique_data_init,
+    advanced_train_data.h_thorique_ecart_data_init,
+    advanced_train_data.dh_reelle_data_init,
+    advanced_train_data.dh_theorique_fin_data_init,
+    advanced_train_data.dh_reelle_fin_data_init,
+    advanced_train_data.Cancelled_Train_Bin,
     train_wagon_count.wagon_count,
     station_data_merge.Train_Distance_KM,
     station_data_merge.Train_Total_Time_Mins,
@@ -3573,5 +3652,130 @@ FROM advanced_train_data
     LEFT JOIN train_wagon_count ON advanced_train_data.idtrain_lot = train_wagon_count.id_train_lot_train_wagon
     LEFT JOIN station_data_merge ON advanced_train_data.idtrain = station_data_merge.id_train
     LEFT JOIN station_data_unstack ON advanced_train_data.idtrain = station_data_unstack.id_train
-    LEFT JOIN public_processed.wagon_data_unstack ON advanced_train_data.idtrain_lot = public_processed.wagon_data_unstack.idtrain_lot
-    ;
+    LEFT JOIN public_processed.wagon_data_unstack ON advanced_train_data.idtrain_lot = public_processed.wagon_data_unstack.idtrain_lot;
+---------
+SELECT *
+FROM public_processed.train_data_final;
+--! Modifying station_data TABLE
+--* Creating final station_data table
+DROP TABLE IF EXISTS public_processed.station_data_final;
+CREATE TABLE public_processed.station_data_final AS
+SELECT public_processed.train_data_final.id_train,
+public_processed.station_data.id_gare,
+    public_processed.station_data.Station_Order,
+    public_processed.station_data.Station_Name,
+    public_processed.station_data.Station_Country,
+    public_processed.station_data.Station_Latitude,
+    public_processed.station_data.Station_Longitude,
+    public_processed.station_data.Actual_Arrival,
+    public_processed.station_data.Actual_Departure,
+    public_processed.station_data.Schedule,
+    public_processed.station_data.Plan_Timestamp,
+    public_processed.station_data.Timestamp_Order,
+    public_processed.station_data.Depart_Variance,
+    public_processed.station_data.Arrive_Variance,
+    public_processed.station_data.Time_From_Prior_Planned,
+    public_processed.station_data.Actual_Timestamp,
+    public_processed.station_data.Time_From_Prior_Actual,
+    public_processed.station_data.Depart_Variance_Mins,
+    public_processed.station_data.Arrive_Variance_Mins,
+    public_processed.station_data.Time_From_Prior_Plan_Mins,
+    public_processed.station_data.Time_From_Prior_Actual_Mins,
+    public_processed.station_data.Travel_Time_Mins,
+    public_processed.station_data.Idle_Time_Mins,
+    public_processed.station_data.KM_Distance_Event,
+    public_processed.station_data.Cumm_Distance_KM,
+    public_processed.station_data.KM_HR_Event,
+    public_processed.station_data.Actual_Timestamp_Valid,
+    public_processed.station_data.Actual_Timestamp_Perc,
+    public_processed.station_data.Cumm_Schedule_Mins,
+    public_processed.station_data.Cumm_Actual_Mins,
+    public_processed.station_data.Origin_Station,
+    public_processed.station_data.Destination_Station,
+    public_processed.station_data.Train_Distance_KM,
+    public_processed.station_data.Train_Total_Time_Mins,
+    public_processed.station_data.Train_Travel_Time_Mins,
+    public_processed.station_data.Train_Idle_Time_Mins,
+    public_processed.station_data.Planned_Departure_Date,
+    public_processed.station_data.Planned_Departure_DOW,
+    public_processed.station_data.Planned_Arrival_Date,
+    public_processed.station_data.Planned_Arrival_DOW,
+    public_processed.station_data.Train_Depart_Variance_Mins,
+    public_processed.station_data.Train_Arrive_Variance_Mins,
+    public_processed.station_data.Travel_KM_HR,
+    public_processed.station_data.Total_KM_HR,
+    public_processed.station_data.Stage_Share_Journey_Distance,
+    public_processed.station_data.Stage_Share_Journey_Time_Mins,
+    public_processed.station_data.Station_City_Country,
+    public_processed.station_data.OD_Pair,
+    public_processed.station_data.Arc,
+    public_processed.station_data.Depart_Variance_Mins_Pos,
+    public_processed.station_data.Arrive_Variance_Mins_Pos,
+    public_processed.station_data.Late_Departure_Bin,
+    public_processed.station_data.Late_Arrival_Bin,
+    public_processed.station_data.Late_Departure_Bin_15,
+    public_processed.station_data.Late_Arrival_Bin_15,
+    public_processed.station_data.Actual_Departure_Bin,
+    public_processed.station_data.Actual_Arrival_Bin,
+    public_processed.station_data.Origin_Station_Bin,
+    public_processed.station_data.Destination_Station_Bin
+FROM public_processed.station_data
+    INNER JOIN public_processed.train_data_final ON public_processed.station_data.id_train = public_processed.train_data_final.id_train
+ORDER BY id_train,
+    Station_Order,
+    Schedule;
+--! Creating incident_data Table
+DROP TABLE IF EXISTS public_processed.incident_data;
+CREATE TABLE IF NOT EXISTS public_processed.incident_data AS WITH incident_concerne_filtered AS (
+    SELECT id_incident,
+        id_train_lot
+    FROM (
+            SELECT public_processed.incident_concerne.id_incident AS id_incident,
+                MAX(public_processed.incident_concerne.id_train_lot) AS id_train_lot,
+                MAX(
+                    public_processed.incident_concerne.annule_trainlot
+                ) AS annule_trainlot
+            FROM public_processed.incident_concerne
+            GROUP BY id_incident
+            ORDER BY id_incident
+        ) rank
+    WHERE annule_trainlot = 1
+),
+incidents AS (
+    SELECT id_incident,
+        id_gare,
+        type_incident,
+        dateH_incident,
+        lieu,
+        statut,
+        statut_commercial,
+        statut_financier,
+        gravite,
+        motif_client,
+        commentaire
+    FROM public_processed.incidents
+)
+SELECT incident_concerne_filtered.id_incident AS id_incident,
+    incident_concerne_filtered.id_train_lot AS id_train_lot,
+    incidents.type_incident AS type_incident,
+    incidents.dateH_incident AS dateH_incident,
+    incidents.lieu AS lieu,
+    incidents.statut AS statut,
+    incidents.statut_commercial AS statut_commercial,
+    incidents.statut_financier AS statut_financier,
+    incidents.gravite AS gravite,
+    incidents.motif_client AS motif_client,
+    incidents.commentaire AS commentaire
+FROM incident_concerne_filtered
+    LEFT JOIN incidents ON incident_concerne_filtered.id_incident = incidents.id_incident
+WHERE id_train_lot IS NOT NULL;
+-----------------
+--! Checking final tables
+SELECT COUNT(*)
+FROM public_processed.train_data_final;
+SELECT COUNT(*)
+FROM public_processed.station_data_final;
+SELECT COUNT(*)
+FROM public_processed.wagon_data;
+SELECT COUNT(*)
+FROM public_processed.incident_data;
