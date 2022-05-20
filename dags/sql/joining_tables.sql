@@ -320,1262 +320,1264 @@ SELECT idtrain_lot,
         CASE
             WHEN Wagon_Order = 0 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_0",
+    ) AS idwagon_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_1",
+    ) AS idwagon_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_2",
+    ) AS idwagon_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_3",
+    ) AS idwagon_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_4",
+    ) AS idwagon_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_5",
+    ) AS idwagon_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_6",
+    ) AS idwagon_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_7",
+    ) AS idwagon_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_8",
+    ) AS idwagon_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_9",
+    ) AS idwagon_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_10",
+    ) AS idwagon_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_11",
+    ) AS idwagon_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_12",
+    ) AS idwagon_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_13",
+    ) AS idwagon_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_14",
+    ) AS idwagon_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_15",
+    ) AS idwagon_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_16",
+    ) AS idwagon_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_17",
+    ) AS idwagon_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_18",
+    ) AS idwagon_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_19",
+    ) AS idwagon_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_20",
+    ) AS idwagon_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_21",
+    ) AS idwagon_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_22",
+    ) AS idwagon_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_23",
+    ) AS idwagon_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_24",
+    ) AS idwagon_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_25",
+    ) AS idwagon_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_26",
+    ) AS idwagon_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_27",
+    ) AS idwagon_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_28",
+    ) AS idwagon_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_29",
+    ) AS idwagon_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_30",
+    ) AS idwagon_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_31",
+    ) AS idwagon_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_32",
+    ) AS idwagon_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_33",
+    ) AS idwagon_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_34",
+    ) AS idwagon_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN id_wagon_train_wagon
         END
-    ) AS "idwagon_35",
+    ) AS idwagon_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_0",
+    ) AS modele_wagon_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_1",
+    ) AS modele_wagon_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_2",
+    ) AS modele_wagon_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_3",
+    ) AS modele_wagon_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_4",
+    ) AS modele_wagon_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_5",
+    ) AS modele_wagon_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_6",
+    ) AS modele_wagon_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_7",
+    ) AS modele_wagon_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_8",
+    ) AS modele_wagon_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_9",
+    ) AS modele_wagon_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_10",
+    ) AS modele_wagon_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_11",
+    ) AS modele_wagon_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_12",
+    ) AS modele_wagon_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_13",
+    ) AS modele_wagon_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_14",
+    ) AS modele_wagon_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_15",
+    ) AS modele_wagon_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_16",
+    ) AS modele_wagon_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_17",
+    ) AS modele_wagon_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_18",
+    ) AS modele_wagon_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_19",
+    ) AS modele_wagon_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_20",
+    ) AS modele_wagon_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_21",
+    ) AS modele_wagon_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_22",
+    ) AS modele_wagon_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_23",
+    ) AS modele_wagon_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_24",
+    ) AS modele_wagon_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_25",
+    ) AS modele_wagon_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_26",
+    ) AS modele_wagon_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_27",
+    ) AS modele_wagon_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_28",
+    ) AS modele_wagon_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_29",
+    ) AS modele_wagon_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_30",
+    ) AS modele_wagon_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_31",
+    ) AS modele_wagon_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_32",
+    ) AS modele_wagon_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_33",
+    ) AS modele_wagon_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_34",
+    ) AS modele_wagon_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN modele_wagon_wagon_modele
         END
-    ) AS "modele_wagon_35",
+    ) AS modele_wagon_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_0",
+    ) AS Wagon_Type_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_1",
+    ) AS Wagon_Type_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_2",
+    ) AS Wagon_Type_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_3",
+    ) AS Wagon_Type_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_4",
+    ) AS Wagon_Type_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_5",
+    ) AS Wagon_Type_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_6",
+    ) AS Wagon_Type_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_7",
+    ) AS Wagon_Type_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_8",
+    ) AS Wagon_Type_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_9",
+    ) AS Wagon_Type_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_10",
+    ) AS Wagon_Type_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_11",
+    ) AS Wagon_Type_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_12",
+    ) AS Wagon_Type_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_13",
+    ) AS Wagon_Type_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_14",
+    ) AS Wagon_Type_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_15",
+    ) AS Wagon_Type_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_16",
+    ) AS Wagon_Type_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_17",
+    ) AS Wagon_Type_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_18",
+    ) AS Wagon_Type_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_19",
+    ) AS Wagon_Type_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_20",
+    ) AS Wagon_Type_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_21",
+    ) AS Wagon_Type_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_22",
+    ) AS Wagon_Type_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_23",
+    ) AS Wagon_Type_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_24",
+    ) AS Wagon_Type_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_25",
+    ) AS Wagon_Type_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_26",
+    ) AS Wagon_Type_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_27",
+    ) AS Wagon_Type_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_28",
+    ) AS Wagon_Type_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_29",
+    ) AS Wagon_Type_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_30",
+    ) AS Wagon_Type_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_31",
+    ) AS Wagon_Type_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_32",
+    ) AS Wagon_Type_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_33",
+    ) AS Wagon_Type_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_34",
+    ) AS Wagon_Type_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN Wagon_Type
         END
-    ) AS "Wagon_Type_35",
+    ) AS Wagon_Type_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN Max_Speed
         END
-    ) AS "Max_Speed_0",
+    ) AS Max_Speed_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN Max_Speed
         END
-    ) AS "Max_Speed_1",
+    ) AS Max_Speed_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN Max_Speed
         END
-    ) AS "Max_Speed_2",
+    ) AS Max_Speed_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN Max_Speed
         END
-    ) AS "Max_Speed_3",
+    ) AS Max_Speed_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN Max_Speed
         END
-    ) AS "Max_Speed_4",
+    ) AS Max_Speed_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN Max_Speed
         END
-    ) AS "Max_Speed_5",
+    ) AS Max_Speed_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN Max_Speed
         END
-    ) AS "Max_Speed_6",
+    ) AS Max_Speed_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN Max_Speed
         END
-    ) AS "Max_Speed_7",
+    ) AS Max_Speed_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN Max_Speed
         END
-    ) AS "Max_Speed_8",
+    ) AS Max_Speed_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN Max_Speed
         END
-    ) AS "Max_Speed_9",
+    ) AS Max_Speed_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN Max_Speed
         END
-    ) AS "Max_Speed_10",
+    ) AS Max_Speed_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN Max_Speed
         END
-    ) AS "Max_Speed_11",
+    ) AS Max_Speed_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN Max_Speed
         END
-    ) AS "Max_Speed_12",
+    ) AS Max_Speed_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN Max_Speed
         END
-    ) AS "Max_Speed_13",
+    ) AS Max_Speed_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN Max_Speed
         END
-    ) AS "Max_Speed_14",
+    ) AS Max_Speed_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN Max_Speed
         END
-    ) AS "Max_Speed_15",
+    ) AS Max_Speed_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN Max_Speed
         END
-    ) AS "Max_Speed_16",
+    ) AS Max_Speed_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN Max_Speed
         END
-    ) AS "Max_Speed_17",
+    ) AS Max_Speed_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN Max_Speed
         END
-    ) AS "Max_Speed_18",
+    ) AS Max_Speed_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN Max_Speed
         END
-    ) AS "Max_Speed_19",
+    ) AS Max_Speed_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN Max_Speed
         END
-    ) AS "Max_Speed_20",
+    ) AS Max_Speed_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN Max_Speed
         END
-    ) AS "Max_Speed_21",
+    ) AS Max_Speed_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN Max_Speed
         END
-    ) AS "Max_Speed_22",
+    ) AS Max_Speed_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN Max_Speed
         END
-    ) AS "Max_Speed_23",
+    ) AS Max_Speed_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN Max_Speed
         END
-    ) AS "Max_Speed_24",
+    ) AS Max_Speed_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN Max_Speed
         END
-    ) AS "Max_Speed_25",
+    ) AS Max_Speed_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN Max_Speed
         END
-    ) AS "Max_Speed_26",
+    ) AS Max_Speed_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN Max_Speed
         END
-    ) AS "Max_Speed_27",
+    ) AS Max_Speed_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN Max_Speed
         END
-    ) AS "Max_Speed_28",
+    ) AS Max_Speed_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN Max_Speed
         END
-    ) AS "Max_Speed_29",
+    ) AS Max_Speed_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN Max_Speed
         END
-    ) AS "Max_Speed_30",
+    ) AS Max_Speed_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN Max_Speed
         END
-    ) AS "Max_Speed_31",
+    ) AS Max_Speed_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN Max_Speed
         END
-    ) AS "Max_Speed_32",
+    ) AS Max_Speed_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN Max_Speed
         END
-    ) AS "Max_Speed_33",
+    ) AS Max_Speed_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN Max_Speed
         END
-    ) AS "Max_Speed_34",
+    ) AS Max_Speed_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN Max_Speed
         END
-    ) AS "Max_Speed_35",
+    ) AS Max_Speed_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_0",
+    ) AS Wagon_Model_Tare_Weight_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_1",
+    ) AS Wagon_Model_Tare_Weight_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_2",
+    ) AS Wagon_Model_Tare_Weight_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_3",
+    ) AS Wagon_Model_Tare_Weight_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_4",
+    ) AS Wagon_Model_Tare_Weight_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_5",
+    ) AS Wagon_Model_Tare_Weight_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_6",
+    ) AS Wagon_Model_Tare_Weight_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_7",
+    ) AS Wagon_Model_Tare_Weight_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_8",
+    ) AS Wagon_Model_Tare_Weight_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_9",
+    ) AS Wagon_Model_Tare_Weight_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_10",
+    ) AS Wagon_Model_Tare_Weight_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_11",
+    ) AS Wagon_Model_Tare_Weight_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_12",
+    ) AS Wagon_Model_Tare_Weight_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_13",
+    ) AS Wagon_Model_Tare_Weight_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_14",
+    ) AS Wagon_Model_Tare_Weight_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_15",
+    ) AS Wagon_Model_Tare_Weight_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_16",
+    ) AS Wagon_Model_Tare_Weight_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_17",
+    ) AS Wagon_Model_Tare_Weight_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_18",
+    ) AS Wagon_Model_Tare_Weight_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_19",
+    ) AS Wagon_Model_Tare_Weight_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_20",
+    ) AS Wagon_Model_Tare_Weight_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_21",
+    ) AS Wagon_Model_Tare_Weight_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_22",
+    ) AS Wagon_Model_Tare_Weight_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_23",
+    ) AS Wagon_Model_Tare_Weight_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_24",
+    ) AS Wagon_Model_Tare_Weight_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_25",
+    ) AS Wagon_Model_Tare_Weight_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_26",
+    ) AS Wagon_Model_Tare_Weight_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_27",
+    ) AS Wagon_Model_Tare_Weight_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_28",
+    ) AS Wagon_Model_Tare_Weight_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_29",
+    ) AS Wagon_Model_Tare_Weight_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_30",
+    ) AS Wagon_Model_Tare_Weight_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_31",
+    ) AS Wagon_Model_Tare_Weight_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_32",
+    ) AS Wagon_Model_Tare_Weight_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_33",
+    ) AS Wagon_Model_Tare_Weight_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_34",
+    ) AS Wagon_Model_Tare_Weight_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN Wagon_Model_Tare_Weight
         END
-    ) AS "Wagon_Model_Tare_Weight_35",
+    ) AS Wagon_Model_Tare_Weight_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_0",
+    ) AS Tare_Weight_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_1",
+    ) AS Tare_Weight_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_2",
+    ) AS Tare_Weight_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_3",
+    ) AS Tare_Weight_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_4",
+    ) AS Tare_Weight_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_5",
+    ) AS Tare_Weight_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_6",
+    ) AS Tare_Weight_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_7",
+    ) AS Tare_Weight_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_8",
+    ) AS Tare_Weight_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_9",
+    ) AS Tare_Weight_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_10",
+    ) AS Tare_Weight_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_11",
+    ) AS Tare_Weight_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_12",
+    ) AS Tare_Weight_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_13",
+    ) AS Tare_Weight_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_14",
+    ) AS Tare_Weight_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_15",
+    ) AS Tare_Weight_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_16",
+    ) AS Tare_Weight_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_17",
+    ) AS Tare_Weight_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_18",
+    ) AS Tare_Weight_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_19",
+    ) AS Tare_Weight_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_20",
+    ) AS Tare_Weight_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_21",
+    ) AS Tare_Weight_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_22",
+    ) AS Tare_Weight_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_23",
+    ) AS Tare_Weight_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_24",
+    ) AS Tare_Weight_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_25",
+    ) AS Tare_Weight_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_26",
+    ) AS Tare_Weight_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_27",
+    ) AS Tare_Weight_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_28",
+    ) AS Tare_Weight_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_29",
+    ) AS Tare_Weight_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_30",
+    ) AS Tare_Weight_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_31",
+    ) AS Tare_Weight_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_32",
+    ) AS Tare_Weight_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_33",
+    ) AS Tare_Weight_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_34",
+    ) AS Tare_Weight_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN Tare_Weight
         END
-    ) AS "Tare_Weight_35",
+    ) AS Tare_Weight_35,
     MAX(
         CASE
             WHEN Wagon_Order = 0 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_0",
+    ) AS Wagon_Start_Date_0,
     MAX(
         CASE
             WHEN Wagon_Order = 1 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_1",
+    ) AS Wagon_Start_Date_1,
     MAX(
         CASE
             WHEN Wagon_Order = 2 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_2",
+    ) AS Wagon_Start_Date_2,
     MAX(
         CASE
             WHEN Wagon_Order = 3 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_3",
+    ) AS Wagon_Start_Date_3,
     MAX(
         CASE
             WHEN Wagon_Order = 4 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_4",
+    ) AS Wagon_Start_Date_4,
     MAX(
         CASE
             WHEN Wagon_Order = 5 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_5",
+    ) AS Wagon_Start_Date_5,
     MAX(
         CASE
             WHEN Wagon_Order = 6 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_6",
+    ) AS Wagon_Start_Date_6,
     MAX(
         CASE
             WHEN Wagon_Order = 7 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_7",
+    ) AS Wagon_Start_Date_7,
     MAX(
         CASE
             WHEN Wagon_Order = 8 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_8",
+    ) AS Wagon_Start_Date_8,
     MAX(
         CASE
             WHEN Wagon_Order = 9 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_9",
+    ) AS Wagon_Start_Date_9,
     MAX(
         CASE
             WHEN Wagon_Order = 10 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_10",
+    ) AS Wagon_Start_Date_10,
     MAX(
         CASE
             WHEN Wagon_Order = 11 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_11",
+    ) AS Wagon_Start_Date_11,
     MAX(
         CASE
             WHEN Wagon_Order = 12 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_12",
+    ) AS Wagon_Start_Date_12,
     MAX(
         CASE
             WHEN Wagon_Order = 13 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_13",
+    ) AS Wagon_Start_Date_13,
     MAX(
         CASE
             WHEN Wagon_Order = 14 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_14",
+    ) AS Wagon_Start_Date_14,
     MAX(
         CASE
             WHEN Wagon_Order = 15 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_15",
+    ) AS Wagon_Start_Date_15,
     MAX(
         CASE
             WHEN Wagon_Order = 16 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_16",
+    ) AS Wagon_Start_Date_16,
     MAX(
         CASE
             WHEN Wagon_Order = 17 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_17",
+    ) AS Wagon_Start_Date_17,
     MAX(
         CASE
             WHEN Wagon_Order = 18 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_18",
+    ) AS Wagon_Start_Date_18,
     MAX(
         CASE
             WHEN Wagon_Order = 19 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_19",
+    ) AS Wagon_Start_Date_19,
     MAX(
         CASE
             WHEN Wagon_Order = 20 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_20",
+    ) AS Wagon_Start_Date_20,
     MAX(
         CASE
             WHEN Wagon_Order = 21 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_21",
+    ) AS Wagon_Start_Date_21,
     MAX(
         CASE
             WHEN Wagon_Order = 22 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_22",
+    ) AS Wagon_Start_Date_22,
     MAX(
         CASE
             WHEN Wagon_Order = 23 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_23",
+    ) AS Wagon_Start_Date_23,
     MAX(
         CASE
             WHEN Wagon_Order = 24 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_24",
+    ) AS Wagon_Start_Date_24,
     MAX(
         CASE
             WHEN Wagon_Order = 25 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_25",
+    ) AS Wagon_Start_Date_25,
     MAX(
         CASE
             WHEN Wagon_Order = 26 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_26",
+    ) AS Wagon_Start_Date_26,
     MAX(
         CASE
             WHEN Wagon_Order = 27 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_27",
+    ) AS Wagon_Start_Date_27,
     MAX(
         CASE
             WHEN Wagon_Order = 28 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_28",
+    ) AS Wagon_Start_Date_28,
     MAX(
         CASE
             WHEN Wagon_Order = 29 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_29",
+    ) AS Wagon_Start_Date_29,
     MAX(
         CASE
             WHEN Wagon_Order = 30 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_30",
+    ) AS Wagon_Start_Date_30,
     MAX(
         CASE
             WHEN Wagon_Order = 31 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_31",
+    ) AS Wagon_Start_Date_31,
     MAX(
         CASE
             WHEN Wagon_Order = 32 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_32",
+    ) AS Wagon_Start_Date_32,
     MAX(
         CASE
             WHEN Wagon_Order = 33 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_33",
+    ) AS Wagon_Start_Date_33,
     MAX(
         CASE
             WHEN Wagon_Order = 34 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_34",
+    ) AS Wagon_Start_Date_34,
     MAX(
         CASE
             WHEN Wagon_Order = 35 THEN Wagon_Start_Date
         END
-    ) AS "Wagon_Start_Date_35"
+    ) AS Wagon_Start_Date_35
+
+
 FROM wagon_data_to_unstack
 GROUP BY idtrain_lot
 ORDER BY idtrain_lot;
@@ -2408,1202 +2410,1202 @@ station_data_unstack AS (
             CASE
                 WHEN Timestamp_Order = 0 THEN Station_Name
             END
-        ) AS "Station_Name_0",
+        ) AS Station_Name_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Station_Name
             END
-        ) AS "Station_Name_1",
+        ) AS Station_Name_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Station_Name
             END
-        ) AS "Station_Name_2",
+        ) AS Station_Name_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Station_Name
             END
-        ) AS "Station_Name_3",
+        ) AS Station_Name_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Station_Name
             END
-        ) AS "Station_Name_4",
+        ) AS Station_Name_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Station_Name
             END
-        ) AS "Station_Name_5",
+        ) AS Station_Name_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Station_Name
             END
-        ) AS "Station_Name_6",
+        ) AS Station_Name_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Station_Name
             END
-        ) AS "Station_Name_7",
+        ) AS Station_Name_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Station_Name
             END
-        ) AS "Station_Name_8",
+        ) AS Station_Name_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Station_Name
             END
-        ) AS "Station_Name_9",
+        ) AS Station_Name_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Station_Name
             END
-        ) AS "Station_Name_10",
+        ) AS Station_Name_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Station_Name
             END
-        ) AS "Station_Name_11",
+        ) AS Station_Name_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Station_Name
             END
-        ) AS "Station_Name_12",
+        ) AS Station_Name_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Station_Name
             END
-        ) AS "Station_Name_13",
+        ) AS Station_Name_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Station_Name
             END
-        ) AS "Station_Name_14",
+        ) AS Station_Name_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Station_Name
             END
-        ) AS "Station_Name_15",
+        ) AS Station_Name_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Station_Name
             END
-        ) AS "Station_Name_16",
+        ) AS Station_Name_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Station_Name
             END
-        ) AS "Station_Name_17",
+        ) AS Station_Name_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Station_Name
             END
-        ) AS "Station_Name_18",
+        ) AS Station_Name_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Station_Name
             END
-        ) AS "Station_Name_19",
+        ) AS Station_Name_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Station_Name
             END
-        ) AS "Station_Name_20",
+        ) AS Station_Name_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Station_Name
             END
-        ) AS "Station_Name_21",
+        ) AS Station_Name_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Station_Name
             END
-        ) AS "Station_Name_22",
+        ) AS Station_Name_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Station_Name
             END
-        ) AS "Station_Name_23",
+        ) AS Station_Name_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_0",
+        ) AS Plan_Timestamp_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_1",
+        ) AS Plan_Timestamp_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_2",
+        ) AS Plan_Timestamp_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_3",
+        ) AS Plan_Timestamp_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_4",
+        ) AS Plan_Timestamp_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_5",
+        ) AS Plan_Timestamp_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_6",
+        ) AS Plan_Timestamp_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_7",
+        ) AS Plan_Timestamp_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_8",
+        ) AS Plan_Timestamp_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_9",
+        ) AS Plan_Timestamp_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_10",
+        ) AS Plan_Timestamp_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_11",
+        ) AS Plan_Timestamp_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_12",
+        ) AS Plan_Timestamp_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_13",
+        ) AS Plan_Timestamp_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_14",
+        ) AS Plan_Timestamp_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_15",
+        ) AS Plan_Timestamp_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_16",
+        ) AS Plan_Timestamp_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_17",
+        ) AS Plan_Timestamp_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_18",
+        ) AS Plan_Timestamp_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_19",
+        ) AS Plan_Timestamp_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_20",
+        ) AS Plan_Timestamp_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_21",
+        ) AS Plan_Timestamp_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_22",
+        ) AS Plan_Timestamp_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Plan_Timestamp
             END
-        ) AS "Plan_Timestamp_23",
+        ) AS Plan_Timestamp_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_0",
+        ) AS Actual_Timestamp_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_1",
+        ) AS Actual_Timestamp_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_2",
+        ) AS Actual_Timestamp_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_3",
+        ) AS Actual_Timestamp_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_4",
+        ) AS Actual_Timestamp_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_5",
+        ) AS Actual_Timestamp_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_6",
+        ) AS Actual_Timestamp_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_7",
+        ) AS Actual_Timestamp_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_8",
+        ) AS Actual_Timestamp_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_9",
+        ) AS Actual_Timestamp_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_10",
+        ) AS Actual_Timestamp_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_11",
+        ) AS Actual_Timestamp_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_12",
+        ) AS Actual_Timestamp_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_13",
+        ) AS Actual_Timestamp_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_14",
+        ) AS Actual_Timestamp_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_15",
+        ) AS Actual_Timestamp_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_16",
+        ) AS Actual_Timestamp_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_17",
+        ) AS Actual_Timestamp_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_18",
+        ) AS Actual_Timestamp_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_19",
+        ) AS Actual_Timestamp_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_20",
+        ) AS Actual_Timestamp_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_21",
+        ) AS Actual_Timestamp_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_22",
+        ) AS Actual_Timestamp_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Actual_Timestamp
             END
-        ) AS "Actual_Timestamp_23",
+        ) AS Actual_Timestamp_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_0",
+        ) AS Time_From_Prior_Plan_Mins_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_1",
+        ) AS Time_From_Prior_Plan_Mins_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_2",
+        ) AS Time_From_Prior_Plan_Mins_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_3",
+        ) AS Time_From_Prior_Plan_Mins_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_4",
+        ) AS Time_From_Prior_Plan_Mins_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_5",
+        ) AS Time_From_Prior_Plan_Mins_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_6",
+        ) AS Time_From_Prior_Plan_Mins_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_7",
+        ) AS Time_From_Prior_Plan_Mins_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_8",
+        ) AS Time_From_Prior_Plan_Mins_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_9",
+        ) AS Time_From_Prior_Plan_Mins_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_10",
+        ) AS Time_From_Prior_Plan_Mins_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_11",
+        ) AS Time_From_Prior_Plan_Mins_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_12",
+        ) AS Time_From_Prior_Plan_Mins_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_13",
+        ) AS Time_From_Prior_Plan_Mins_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_14",
+        ) AS Time_From_Prior_Plan_Mins_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_15",
+        ) AS Time_From_Prior_Plan_Mins_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_16",
+        ) AS Time_From_Prior_Plan_Mins_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_17",
+        ) AS Time_From_Prior_Plan_Mins_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_18",
+        ) AS Time_From_Prior_Plan_Mins_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_19",
+        ) AS Time_From_Prior_Plan_Mins_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_20",
+        ) AS Time_From_Prior_Plan_Mins_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_21",
+        ) AS Time_From_Prior_Plan_Mins_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_22",
+        ) AS Time_From_Prior_Plan_Mins_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Time_From_Prior_Plan_Mins
             END
-        ) AS "Time_From_Prior_Plan_Mins_23",
+        ) AS Time_From_Prior_Plan_Mins_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_0",
+        ) AS Depart_Variance_Mins_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_1",
+        ) AS Depart_Variance_Mins_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_2",
+        ) AS Depart_Variance_Mins_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_3",
+        ) AS Depart_Variance_Mins_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_4",
+        ) AS Depart_Variance_Mins_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_5",
+        ) AS Depart_Variance_Mins_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_6",
+        ) AS Depart_Variance_Mins_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_7",
+        ) AS Depart_Variance_Mins_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_8",
+        ) AS Depart_Variance_Mins_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_9",
+        ) AS Depart_Variance_Mins_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_10",
+        ) AS Depart_Variance_Mins_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_11",
+        ) AS Depart_Variance_Mins_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_12",
+        ) AS Depart_Variance_Mins_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_13",
+        ) AS Depart_Variance_Mins_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_14",
+        ) AS Depart_Variance_Mins_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_15",
+        ) AS Depart_Variance_Mins_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_16",
+        ) AS Depart_Variance_Mins_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_17",
+        ) AS Depart_Variance_Mins_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_18",
+        ) AS Depart_Variance_Mins_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_19",
+        ) AS Depart_Variance_Mins_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_20",
+        ) AS Depart_Variance_Mins_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_21",
+        ) AS Depart_Variance_Mins_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_22",
+        ) AS Depart_Variance_Mins_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Depart_Variance_Mins
             END
-        ) AS "Depart_Variance_Mins_23",
+        ) AS Depart_Variance_Mins_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_0",
+        ) AS Arrive_Variance_Mins_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_1",
+        ) AS Arrive_Variance_Mins_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_2",
+        ) AS Arrive_Variance_Mins_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_3",
+        ) AS Arrive_Variance_Mins_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_4",
+        ) AS Arrive_Variance_Mins_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_5",
+        ) AS Arrive_Variance_Mins_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_6",
+        ) AS Arrive_Variance_Mins_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_7",
+        ) AS Arrive_Variance_Mins_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_8",
+        ) AS Arrive_Variance_Mins_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_9",
+        ) AS Arrive_Variance_Mins_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_10",
+        ) AS Arrive_Variance_Mins_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_11",
+        ) AS Arrive_Variance_Mins_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_12",
+        ) AS Arrive_Variance_Mins_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_13",
+        ) AS Arrive_Variance_Mins_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_14",
+        ) AS Arrive_Variance_Mins_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_15",
+        ) AS Arrive_Variance_Mins_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_16",
+        ) AS Arrive_Variance_Mins_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_17",
+        ) AS Arrive_Variance_Mins_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_18",
+        ) AS Arrive_Variance_Mins_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_19",
+        ) AS Arrive_Variance_Mins_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_20",
+        ) AS Arrive_Variance_Mins_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_21",
+        ) AS Arrive_Variance_Mins_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_22",
+        ) AS Arrive_Variance_Mins_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Arrive_Variance_Mins
             END
-        ) AS "Arrive_Variance_Mins_23",
+        ) AS Arrive_Variance_Mins_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_0",
+        ) AS Travel_Time_Mins_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_1",
+        ) AS Travel_Time_Mins_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_2",
+        ) AS Travel_Time_Mins_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_3",
+        ) AS Travel_Time_Mins_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_4",
+        ) AS Travel_Time_Mins_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_5",
+        ) AS Travel_Time_Mins_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_6",
+        ) AS Travel_Time_Mins_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_7",
+        ) AS Travel_Time_Mins_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_8",
+        ) AS Travel_Time_Mins_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_9",
+        ) AS Travel_Time_Mins_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_10",
+        ) AS Travel_Time_Mins_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_11",
+        ) AS Travel_Time_Mins_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_12",
+        ) AS Travel_Time_Mins_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_13",
+        ) AS Travel_Time_Mins_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_14",
+        ) AS Travel_Time_Mins_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_15",
+        ) AS Travel_Time_Mins_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_16",
+        ) AS Travel_Time_Mins_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_17",
+        ) AS Travel_Time_Mins_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_18",
+        ) AS Travel_Time_Mins_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_19",
+        ) AS Travel_Time_Mins_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_20",
+        ) AS Travel_Time_Mins_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_21",
+        ) AS Travel_Time_Mins_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_22",
+        ) AS Travel_Time_Mins_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Travel_Time_Mins
             END
-        ) AS "Travel_Time_Mins_23",
+        ) AS Travel_Time_Mins_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_0",
+        ) AS Idle_Time_Mins_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_1",
+        ) AS Idle_Time_Mins_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_2",
+        ) AS Idle_Time_Mins_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_3",
+        ) AS Idle_Time_Mins_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_4",
+        ) AS Idle_Time_Mins_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_5",
+        ) AS Idle_Time_Mins_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_6",
+        ) AS Idle_Time_Mins_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_7",
+        ) AS Idle_Time_Mins_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_8",
+        ) AS Idle_Time_Mins_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_9",
+        ) AS Idle_Time_Mins_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_10",
+        ) AS Idle_Time_Mins_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_11",
+        ) AS Idle_Time_Mins_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_12",
+        ) AS Idle_Time_Mins_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_13",
+        ) AS Idle_Time_Mins_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_14",
+        ) AS Idle_Time_Mins_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_15",
+        ) AS Idle_Time_Mins_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_16",
+        ) AS Idle_Time_Mins_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_17",
+        ) AS Idle_Time_Mins_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_18",
+        ) AS Idle_Time_Mins_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_19",
+        ) AS Idle_Time_Mins_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_20",
+        ) AS Idle_Time_Mins_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_21",
+        ) AS Idle_Time_Mins_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_22",
+        ) AS Idle_Time_Mins_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN Idle_Time_Mins
             END
-        ) AS "Idle_Time_Mins_23",
+        ) AS Idle_Time_Mins_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_0",
+        ) AS KM_Distance_Event_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_1",
+        ) AS KM_Distance_Event_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_2",
+        ) AS KM_Distance_Event_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_3",
+        ) AS KM_Distance_Event_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_4",
+        ) AS KM_Distance_Event_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_5",
+        ) AS KM_Distance_Event_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_6",
+        ) AS KM_Distance_Event_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_7",
+        ) AS KM_Distance_Event_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_8",
+        ) AS KM_Distance_Event_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_9",
+        ) AS KM_Distance_Event_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_10",
+        ) AS KM_Distance_Event_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_11",
+        ) AS KM_Distance_Event_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_12",
+        ) AS KM_Distance_Event_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_13",
+        ) AS KM_Distance_Event_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_14",
+        ) AS KM_Distance_Event_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_15",
+        ) AS KM_Distance_Event_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_16",
+        ) AS KM_Distance_Event_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_17",
+        ) AS KM_Distance_Event_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_18",
+        ) AS KM_Distance_Event_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_19",
+        ) AS KM_Distance_Event_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_20",
+        ) AS KM_Distance_Event_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_21",
+        ) AS KM_Distance_Event_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_22",
+        ) AS KM_Distance_Event_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN KM_Distance_Event
             END
-        ) AS "KM_Distance_Event_23",
+        ) AS KM_Distance_Event_23,
         MAX(
             CASE
                 WHEN Timestamp_Order = 0 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_0",
+        ) AS KM_HR_Event_0,
         MAX(
             CASE
                 WHEN Timestamp_Order = 1 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_1",
+        ) AS KM_HR_Event_1,
         MAX(
             CASE
                 WHEN Timestamp_Order = 2 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_2",
+        ) AS KM_HR_Event_2,
         MAX(
             CASE
                 WHEN Timestamp_Order = 3 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_3",
+        ) AS KM_HR_Event_3,
         MAX(
             CASE
                 WHEN Timestamp_Order = 4 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_4",
+        ) AS KM_HR_Event_4,
         MAX(
             CASE
                 WHEN Timestamp_Order = 5 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_5",
+        ) AS KM_HR_Event_5,
         MAX(
             CASE
                 WHEN Timestamp_Order = 6 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_6",
+        ) AS KM_HR_Event_6,
         MAX(
             CASE
                 WHEN Timestamp_Order = 7 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_7",
+        ) AS KM_HR_Event_7,
         MAX(
             CASE
                 WHEN Timestamp_Order = 8 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_8",
+        ) AS KM_HR_Event_8,
         MAX(
             CASE
                 WHEN Timestamp_Order = 9 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_9",
+        ) AS KM_HR_Event_9,
         MAX(
             CASE
                 WHEN Timestamp_Order = 10 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_10",
+        ) AS KM_HR_Event_10,
         MAX(
             CASE
                 WHEN Timestamp_Order = 11 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_11",
+        ) AS KM_HR_Event_11,
         MAX(
             CASE
                 WHEN Timestamp_Order = 12 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_12",
+        ) AS KM_HR_Event_12,
         MAX(
             CASE
                 WHEN Timestamp_Order = 13 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_13",
+        ) AS KM_HR_Event_13,
         MAX(
             CASE
                 WHEN Timestamp_Order = 14 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_14",
+        ) AS KM_HR_Event_14,
         MAX(
             CASE
                 WHEN Timestamp_Order = 15 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_15",
+        ) AS KM_HR_Event_15,
         MAX(
             CASE
                 WHEN Timestamp_Order = 16 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_16",
+        ) AS KM_HR_Event_16,
         MAX(
             CASE
                 WHEN Timestamp_Order = 17 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_17",
+        ) AS KM_HR_Event_17,
         MAX(
             CASE
                 WHEN Timestamp_Order = 18 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_18",
+        ) AS KM_HR_Event_18,
         MAX(
             CASE
                 WHEN Timestamp_Order = 19 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_19",
+        ) AS KM_HR_Event_19,
         MAX(
             CASE
                 WHEN Timestamp_Order = 20 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_20",
+        ) AS KM_HR_Event_20,
         MAX(
             CASE
                 WHEN Timestamp_Order = 21 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_21",
+        ) AS KM_HR_Event_21,
         MAX(
             CASE
                 WHEN Timestamp_Order = 22 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_22",
+        ) AS KM_HR_Event_22,
         MAX(
             CASE
                 WHEN Timestamp_Order = 23 THEN KM_HR_Event
             END
-        ) AS "KM_HR_Event_23"
+        ) AS KM_HR_Event_23
     FROM station_data_to_unstack
     GROUP BY id_train
 )
@@ -3661,7 +3663,7 @@ FROM public_processed.train_data_final;
 DROP TABLE IF EXISTS public_processed.station_data_final;
 CREATE TABLE public_processed.station_data_final AS
 SELECT public_processed.train_data_final.id_train,
-public_processed.station_data.id_gare,
+    public_processed.station_data.id_gare,
     public_processed.station_data.Station_Order,
     public_processed.station_data.Station_Name,
     public_processed.station_data.Station_Country,
