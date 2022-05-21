@@ -16,3 +16,4 @@ WHERE schema_name = 'public'
     AND relname NOT LIKE '%_pkey'
     AND relname NOT LIKE '%_seq'
 ORDER BY table_size DESC;
+
