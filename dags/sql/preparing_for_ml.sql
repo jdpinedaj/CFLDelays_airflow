@@ -19,8 +19,7 @@ SELECT train_data_final.*,
         tare_weight_0 + tare_weight_1 + tare_weight_2 + tare_weight_3 + tare_weight_4 + tare_weight_5 + tare_weight_6 + tare_weight_7 + tare_weight_8 + tare_weight_9 + tare_weight_10 + tare_weight_11 + tare_weight_12 + tare_weight_13 + tare_weight_14 + tare_weight_15 + tare_weight_16 + tare_weight_17 + tare_weight_18 + tare_weight_19 + tare_weight_20 + tare_weight_21 + tare_weight_22 + tare_weight_23 + tare_weight_24 + tare_weight_25 + tare_weight_26 + tare_weight_27 + tare_weight_28 + tare_weight_29 + tare_weight_30 + tare_weight_31 + tare_weight_32 + tare_weight_33 + tare_weight_34 + tare_weight_35
     ) AS train_tare_weight
 FROM public_processed.train_data_final
-    LEFT JOIN public_processed.incident_data ON public_processed.train_data_final.idtrain_lot = public_processed.incident_data.id_train_lot
-    LEFT JOIN public_processed.station_data_final ON public_processed.train_data_final.id_train = public_processed.station_data_final.id_train;
+    LEFT JOIN public_processed.incident_data ON public_processed.train_data_final.idtrain_lot = public_processed.incident_data.id_train_lot;
 --! CREATING data related to trains and wagons
 DROP TABLE IF EXISTS public_ready_for_ML.data1_trains_wagons;
 CREATE TABLE IF NOT EXISTS public_ready_for_ML.data1_trains_wagons AS (
@@ -1039,4 +1038,4 @@ SELECT id_train,
     Depart_Variance_Mins_dep,
     Arrive_Variance_Mins_arriv
 FROM public_ready_for_ML.df_final_for_ml
-WHERE id_train = 21165
+WHERE id_train = 21165;
