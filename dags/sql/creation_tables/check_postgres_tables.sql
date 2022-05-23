@@ -9,7 +9,7 @@ FROM (
         FROM pg_catalog.pg_class
             JOIN pg_catalog.pg_namespace ON relnamespace = pg_catalog.pg_namespace.oid
     ) t
-WHERE schema_name = {{ params.schema_name }}
+WHERE schema_name = 'public'
     AND relname NOT LIKE '%_pkey'
     AND relname NOT LIKE '%_seq'
 ORDER BY table_size DESC;

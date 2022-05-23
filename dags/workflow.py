@@ -358,7 +358,6 @@ populate_wagon_modele_table = ExcelToPostgresOperator(
 check_postgres_tables = PostgresOperator(
     task_id='check_postgres_tables',
     sql='sql/creation_tables/check_postgres_tables.sql',
-    params={'schema_name': 'public'},
     postgres_conn_id='postgres_default',
     dag=dag,
 )
@@ -369,7 +368,7 @@ create_public_processed_schema = PostgresOperator(
     task_id="create_public_processed_schema",
     postgres_conn_id='postgres_default',
     sql='sql/preprocessing_tables/create_public_processed_schema.sql',
-    params={'schema_name': 'public_processed'},
+    params={'schema_name': '"public_processed"'},
     dag=dag,
 )
 
@@ -512,7 +511,7 @@ create_public_ready_for_ml_schema = PostgresOperator(
     task_id="create_public_ready_for_ml_schema",
     postgres_conn_id='postgres_default',
     sql='sql/preparing_for_ml/create_public_ready_for_ml_schema.sql',
-    params={'schema_name': 'public_ready_for_ML'},
+    params={'schema_name': 'public_ready_for_ml'},
     dag=dag,
 )
 #? 4.9. Preparing dataset for ML

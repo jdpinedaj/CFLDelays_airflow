@@ -12,6 +12,9 @@ test.ipynb
 # mlruns
 mlruns
 
+# queries
+dags/sql/checking_columns.sql
+
 # cache
 scripts/__pycache__
 __pycache__

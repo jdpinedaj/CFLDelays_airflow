@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS {{ params.public_ready_for_ml }};
+CREATE SCHEMA IF NOT EXISTS {{ params.schema_name }};
