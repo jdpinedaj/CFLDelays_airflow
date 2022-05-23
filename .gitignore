@@ -37,5 +37,5 @@ dags/scripts/*
 
 # others
 .idea
-requirements.txt
+#requirements.txt
 examples/*
