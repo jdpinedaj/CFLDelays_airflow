@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS { { params.table_name } };
-CREATE TABLE IF NOT EXISTS { { params.table_name } } (
+DROP TABLE IF EXISTS {{ params.table_name }};
+CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
     id SERIAL PRIMARY KEY,
     IDINCIDENT_CONCERNE VARCHAR NOT NULL,
     IDINCIDENT VARCHAR NOT NULL,

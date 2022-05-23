@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS {{ params.table_name }};
+CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
+    id SERIAL PRIMARY KEY,
+    IDTRAIN_POSITION VARCHAR NOT NULL,
+    IDTRAIN VARCHAR NOT NULL,
+    DateH_position VARCHAR NOT NULL,
+    Latitude VARCHAR NOT NULL,
+    Longitude VARCHAR NOT NULL
+);

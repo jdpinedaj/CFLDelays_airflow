@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS {{ params.table_name }};
+CREATE TABLE IF NOT EXISTS {{ params.table_name }} (
+    id SERIAL PRIMARY KEY,
+    IDTRAIN_WAGON VARCHAR NOT NULL,
+    IDWAGON VARCHAR NOT NULL,
+    IDTRAIN_LOT VARCHAR NOT NULL,
+    Num_Position VARCHAR NOT NULL,
+    IDUtilisateur_creation VARCHAR NOT NULL,
+    DateH_creation VARCHAR NOT NULL,
+    IDUtilisateur_maj VARCHAR NOT NULL,
+    DateH_maj VARCHAR NOT NULL,
+    IDWAGON_MODELE VARCHAR NOT NULL,
+    Top_wagon_maitre VARCHAR NOT NULL
+);
