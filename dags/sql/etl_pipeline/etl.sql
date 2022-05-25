@@ -15,43 +15,86 @@ station_arrival AS (
     FROM cfl.public_ready_for_ML.df_final_for_ml
         LEFT JOIN cfl.public_processed.stations_countries ON df_final_for_ml.Station_Name_arriv = stations_countries.station
 )
-SELECT df_final_for_ml.incoterm_data_init AS incoterm,
-    df_final_for_ml.max_teu AS max_teu,
-    df_final_for_ml.teu_count AS teu_count,
-    df_final_for_ml.max_length AS max_length,
-    df_final_for_ml.train_length AS train_length,
-    df_final_for_ml.train_weight AS train_weight,
-    df_final_for_ml.planned_departure_dow AS planned_departure_day,
-    df_final_for_ml.planned_arrival_dow AS planned_arrival_day,
-    df_final_for_ml.planned_arrival AS planned_arrival,
-    df_final_for_ml.depart_week_num AS depart_week_number,
-    df_final_for_ml.wagon_count AS wagon_count,
-    df_final_for_ml.train_distance_km AS total_distance_trip,
-    df_final_for_ml.train_tare_weight AS sum_tares_wagons,
-    station_departure.station_dep AS departure_station,
-    station_arrival.station_arriv AS arrival_station,
-    station_departure.country_dep AS departure_country,
-    station_arrival.country_arriv AS arrival_country,
-    df_final_for_ml.Depart_Variance_Mins_dep AS departure_delay,
-    df_final_for_ml.Arrive_Variance_Mins_arriv AS arrival_delay,
-    df_final_for_ml.KM_Distance_Event_arriv AS distance_between_control_stations,
-    df_final_for_ml.train_weight / NULLIF(df_final_for_ml.train_length, 0) AS weight_per_length_of_train,
-    df_final_for_ml.train_weight / NULLIF(df_final_for_ml.wagon_count, 0) AS weight_per_wagon_of_train,
-    -- station_departure.lat_dep AS latitude_station_departure,
-    -- station_departure.long_dep AS longitude_station_departure,
-    -- station_arrival.lat_arriv AS latitude_station_arrival,
-    -- station_arrival.long_arriv AS longitude_station_arrival,
-    -- CONCAT(
-    --     station_departure.station_dep,
-    --     '--',
-    --     station_arrival.station_arriv
-    -- ) AS departure_arrival_route,
-    df_final_for_ml.type_incident AS incident_type,
-    df_final_for_ml.gravite AS incident_gravity,
-    df_final_for_ml.motif_client AS incident_customer_reason,
-    --df_final_for_ml.planned_arrival
-FROM cfl.public_ready_for_ML.df_final_for_ml
-    LEFT JOIN station_departure ON df_final_for_ml.Station_Name_dep = station_departure.station_dep
-    LEFT JOIN station_arrival ON df_final_for_ml.Station_Name_arriv = station_arrival.station_arriv
-WHERE cancelled_train_bin = 0 -- Filtering cancelled trains
-;
+SELECT incoterm,
+    max_teu,
+    teu_count,
+    max_length,
+    train_length,
+    train_weight,
+    planned_departure_day,
+    planned_arrival_day,
+    departure_week_number wagon_count,
+    total_distance_trip,
+    sum_tares_wagons,
+    departure_country,
+    arrival_country,
+    departure_delay,
+    arrival_delay,
+    distance_between_control_stations,
+    weight_per_length_of_train,
+    weight_per_wagon_of_train,
+    incident_type,
+    incident_gravity,
+    incident_customer_reason,
+    month_arrival,
+    -- arrival_night usingh hour_arrival
+    CASE
+        WHEN (
+            hour_arrival >= 20
+            AND hour_arrival <= 5
+        ) THEN 'yes'
+        ELSE 'no'
+    END AS arrival_night,
+    -- peak_time using hour_arrival
+    CASE
+        WHEN hour_arrival >= 6
+        AND hour_arrival <= 9 THEN 'yes'
+        WHEN hour_arrival >= 16
+        AND hour_arrival <= 19 THEN 'yes'
+        ELSE 'no'
+    END AS peak_time
+FROM (
+        SELECT df_final_for_ml.incoterm_data_init AS incoterm,
+            df_final_for_ml.max_teu AS max_teu,
+            df_final_for_ml.teu_count AS teu_count,
+            df_final_for_ml.max_length AS max_length,
+            df_final_for_ml.train_length AS train_length,
+            df_final_for_ml.train_weight AS train_weight,
+            df_final_for_ml.planned_departure_dow AS planned_departure_day,
+            df_final_for_ml.planned_arrival_dow AS planned_arrival_day,
+            df_final_for_ml.planned_arrival AS planned_arrival,
+            df_final_for_ml.depart_week_num AS departure_week_number,
+            df_final_for_ml.wagon_count AS wagon_count,
+            df_final_for_ml.train_distance_km AS total_distance_trip,
+            df_final_for_ml.train_tare_weight AS sum_tares_wagons,
+            station_departure.station_dep AS departure_station,
+            station_arrival.station_arriv AS arrival_station,
+            station_departure.country_dep AS departure_country,
+            station_arrival.country_arriv AS arrival_country,
+            df_final_for_ml.Depart_Variance_Mins_dep AS departure_delay,
+            df_final_for_ml.Arrive_Variance_Mins_arriv AS arrival_delay,
+            df_final_for_ml.KM_Distance_Event_arriv AS distance_between_control_stations,
+            df_final_for_ml.train_weight / NULLIF(df_final_for_ml.train_length, 0) AS weight_per_length_of_train,
+            df_final_for_ml.train_weight / NULLIF(df_final_for_ml.wagon_count, 0) AS weight_per_wagon_of_train,
+            station_departure.lat_dep AS latitude_station_departure,
+            station_departure.long_dep AS longitude_station_departure,
+            station_arrival.lat_arriv AS latitude_station_arrival,
+            station_arrival.long_arriv AS longitude_station_arrival,
+            CONCAT(
+                station_departure.station_dep,
+                '--',
+                station_arrival.station_arriv
+            ) AS departure_arrival_route,
+            df_final_for_ml.type_incident AS incident_type,
+            df_final_for_ml.gravite AS incident_gravity,
+            df_final_for_ml.motif_client AS incident_customer_reason,
+            TO_CHAR(df_final_for_ml.planned_arrival, 'Month') AS month_arrival,
+            EXTRACT(
+                HOUR
+                FROM df_final_for_ml.planned_arrival
+            ) AS hour_arrival
+        FROM cfl.public_ready_for_ML.df_final_for_ml
+            LEFT JOIN station_departure ON df_final_for_ml.Station_Name_dep = station_departure.station_dep
+            LEFT JOIN station_arrival ON df_final_for_ml.Station_Name_arriv = station_arrival.station_arriv
+        WHERE cancelled_train_bin = 0 -- Filtering cancelled trains
+    ) AS df_final_etl;
