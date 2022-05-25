@@ -648,7 +648,8 @@ create_public_processed_schema >> [
     preprocess_incident_concerne_table, preprocess_incidents_table,
     preprocess_station_table, preprocess_train_etape_table,
     preprocess_train_jalon_table, preprocess_train_lot_table,
-    preprocess_train_position_table, preprocess_train_table
+    preprocess_train_position_table, preprocess_train_table,
+    preprocess_stations_countries_table
 ] >> joining_tables
 
 joining_tables >> [
