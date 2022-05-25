@@ -6,18 +6,18 @@
 # RUN pip install --no-cache-dir --user -r /requirements.txt
 
 ###############################
-FROM apache/airflow:2.2.3
+FROM apache/airflow:2.3.1
 
-#Generar variables de entorno necesarias
+# Generating necessary environment variables
 ENV AIRFLOW_HOME=/opt/airflow
 ENV C_FORCE_ROOT="true"
 
-# Instalar paquetes de python
+# Installing python libraries
 COPY requirements.txt /requirements.txt
 RUN pip install --user --upgrade pip
 RUN pip install --no-cache-dir --user -r /requirements.txt
 
-# # Crear los directorios necesarios
+# # Creating necessary directories
 # RUN mkdir -p ${AIRFLOW_HOME}/dags \
 #     && mkdir -p ${AIRFLOW_HOME}/logs \
 #     && mkdir -p ${AIRFLOW_HOME}/LibreriasGlobales \
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir --user -r /requirements.txt
 #     && mkdir -p ${AIRFLOW_HOME}/Cargas/data \
 #     && mkdir -p ${AIRFLOW_HOME}/Cargas/predict \
 #     && mkdir -p ${AIRFLOW_HOME}/Cargas/scripts
-# # Copiar los archivos necesarios
+# # Copying necessary files
 # COPY ./Scripts/Cargas/Config/Airflow/packages.pth /usr/lib/python3.6/site-packages
 #COPY ./Scripts/Cargas/Config/Airflow/airflow_celeryexecutor.cfg ${AIRFLOW_HOME}/airflow.cfg
 
