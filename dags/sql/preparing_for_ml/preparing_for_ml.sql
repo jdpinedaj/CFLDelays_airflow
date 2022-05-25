@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS cfl.public_ready_for_ML.data1_trains_wagons AS (
         incoterm_data_init,
         teu_count,
         max_teu,
-        train_weight,
+        -- Converting train_weight to t
+        train_weight / 1000 AS train_weight,
         train_length,
         dateh_suppression_data_init,
         cancellation_reason,
@@ -1022,4 +1023,6 @@ SELECT cfl.public_ready_for_ML.data1_trains_wagons.*,
     KM_HR_Event_arriv
 FROM cfl.public_ready_for_ML.data1_trains_wagons
     LEFT JOIN union_of_data_station ON cfl.public_ready_for_ML.data1_trains_wagons.id_train = union_of_data_station.id_train
-WHERE Station_Name_dep IS NOT NULL;
+WHERE Station_Name_dep IS NOT NULL
+    AND origin_station <> 'Mertert-Port'
+    AND destination_station <> 'Mertert-Port';
