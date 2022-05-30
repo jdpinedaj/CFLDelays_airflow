@@ -1,7 +1,27 @@
-SELECT id_train,
+SELECT incoterm,
+    max_teu,
+    teu_count,
+    max_length,
+    train_length,
     train_weight,
-    weight_length,
-    weight_wagon,
-    cancelled_train_bin
+    planned_departure_day,
+    planned_arrival_day,
+    departure_week_number,
+    wagon_count,
+    total_distance_trip,
+    sum_tares_wagons,
+    departure_country,
+    arrival_country,
+    departure_delay,
+    arrival_delay,
+    distance_between_control_stations,
+    weight_per_length_of_train,
+    weight_per_wagon_of_train,
+    incident_type,
+    incident_gravity,
+    incident_customer_reason,
+    month_arrival,
+    arrival_night,
+    peak_time
 FROM {{ params.table_name }}
-ORDER BY id_train;
+LIMIT 100;

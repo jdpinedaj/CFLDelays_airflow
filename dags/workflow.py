@@ -11,6 +11,7 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from custom_operators.ExcelToPostgresOperator import ExcelToPostgresOperator
 from scripts.creating_postgres_tables import creating_empty_tables
+from scripts.loading_data import load_data
 import os
 import pandas as pd
 
@@ -32,16 +33,21 @@ default_args = {
 SCHEDULE_INTERVAL = '@once'
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME')
 LOCATION_DATA = '/dags/data/'
-LOCATION_QUERIES = '/dags/data/'
+#LOCATION_QUERIES = '/dags/data/'
+POSTGRES_ADDRESS = 'host.docker.internal'
+POSTGRES_PORT = 5432
+POSTGRES_USERNAME = 'airflow'
+POSTGRES_PASSWORD = 'airflow'
+POSTGRES_DBNAME = 'cfl'
 
 #* Those values are needed to create the connection to the Postgres database in the airflow UI
 # conn = Connection(conn_id='postgres_default',
 #                   conn_type='postgres',
-#                   host='host.docker.internal',
-#                   schema='cfl',
-#                   login='airflow',
-#                   password='airflow',
-#                   port=5432)
+#                   host=POSTGRES_ADDRESS,
+#                   schema=POSTGRES_DBNAME,
+#                   login=POSTGRES_USERNAME,
+#                   password=POSTGRES_PASSWORD,
+#                   port=POSTGRES_PORT)
 
 # Additional variables
 date = datetime.now().strftime("%Y_%m_%d")
@@ -51,6 +57,10 @@ date = datetime.now().strftime("%Y_%m_%d")
 
 def creating_tables():
     creating_empty_tables()
+
+
+def loading_data():
+    load_data()
 
 
 def file_path_tmp(file_name):
@@ -73,7 +83,7 @@ def file_path_tmp(file_name):
 ##! 3. Instantiate a DAG
 #######################
 
-dag = DAG(dag_id='CFL_delay_prediction',
+dag = DAG(dag_id='CFL_delay_prediction_v1',
           description='CFL_delay_prediction',
           start_date=datetime.now(),
           schedule_interval=SCHEDULE_INTERVAL,
@@ -584,6 +594,25 @@ check_data_etl = PostgresOperator(
     dag=dag,
 )
 
+#? 4.9. ML process
+
+postgres_to_pandas = PythonOperator(
+    task_id="postgres_to_pandas",
+    python_callable=loading_data,
+    op_kwargs={
+        'postgres_conn_id': 'postgres_default',
+        # 'username': POSTGRES_USERNAME,
+        # 'password': POSTGRES_PASSWORD,
+        # 'host': POSTGRES_ADDRESS,
+        # 'port': POSTGRES_PORT,
+        'dbname': POSTGRES_DBNAME,
+        'schema_name': 'public_etl',
+        'table_name': 'df_final_etl_no_outliers',
+        #'file_name': 'df_final_etl.csv'
+    },
+    dag=dag,
+)
+
 #######################
 ##! 5. Setting up dependencies
 #######################
@@ -676,3 +705,6 @@ create_public_ready_for_ml_schema >> preparing_for_ml >> check_data_ready_for_ml
 check_data_ready_for_ml >> create_public_etl_schema
 
 create_public_etl_schema >> etl_pipeline >> check_data_etl
+
+# ML process
+check_data_etl >> postgres_to_pandas

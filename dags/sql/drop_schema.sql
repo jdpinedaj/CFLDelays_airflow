@@ -1,0 +1,1 @@
+DROP SCHEMA IF EXISTS {{ params.schema_name }} CASCADE;

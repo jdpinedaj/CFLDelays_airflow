@@ -7,3 +7,9 @@ Click==7.1.2
 PyYAML==5.4.1
 scikit_learn==0.23.2
 openpyxl == 3.0.9
+
+# For testing later, depending on how do I read the data from postgres to pandas
+# psycopg2==2.9.3
+# requests==2.22.0
+# SQLAlchemy==1.4.36
+#pandas==1.4.2

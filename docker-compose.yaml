@@ -80,8 +80,9 @@ services:
       interval: 5s
       retries: 5
     restart: always
+    command: postgres -c tcp_keepalives_idle=130 -c tcp_keepalives_interval=10 -c tcp_keepalives_count=15
     ports:
-        - "5432:5432"
+      - "5432:5432"
 
   airflow-webserver:
     <<: *airflow-common
