@@ -37,6 +37,8 @@ dags/scripts/*
 !dags/scripts/.gitkeep
 !dags/scripts/creating_postgres_tables.py
 !dags/scripts/loading_data.py
+!dags/scripts/training.py
+!dags/scripts/prediction.py
 
 # others
 .idea

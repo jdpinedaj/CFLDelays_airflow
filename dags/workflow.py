@@ -11,7 +11,10 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from custom_operators.ExcelToPostgresOperator import ExcelToPostgresOperator
 from scripts.creating_postgres_tables import creating_empty_tables
-from scripts.loading_data import load_data
+from scripts.loading_data import data_from_postgres_to_pandas
+from scripts.training import training_model
+from scripts.prediction import predicting
+
 import os
 import pandas as pd
 
@@ -33,6 +36,8 @@ default_args = {
 SCHEDULE_INTERVAL = '@once'
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME')
 LOCATION_DATA = '/dags/data/'
+LOCATION_MODEL = '/dags/model/'
+LOCATION_PREDICT = '/dags/predict/'
 #LOCATION_QUERIES = '/dags/data/'
 POSTGRES_ADDRESS = 'host.docker.internal'
 POSTGRES_PORT = 5432
@@ -54,19 +59,9 @@ date = datetime.now().strftime("%Y_%m_%d")
 
 # Functions
 
-
-def creating_tables():
-    creating_empty_tables()
-
-
-def loading_data():
-    load_data()
-
-
-def file_path_tmp(file_name):
-    file_path_tmp = f"{AIRFLOW_HOME}{LOCATION_DATA}{file_name}"
-    return file_path_tmp
-
+# def file_path_tmp(file_name):
+#     file_path_tmp = f"{AIRFLOW_HOME}{LOCATION_DATA}{file_name}"
+#     return file_path_tmp
 
 # def generate_delete_tasks(tables_to_delete, dag):
 #     tasks = []
@@ -104,7 +99,7 @@ dag = DAG(dag_id='CFL_delay_prediction_v1',
 
 # creating_postgres_tables = PythonOperator(
 #     task_id='creating_postgres_tables',
-#     python_callable=creating_tables,
+#     python_callable=creating_empty_tables,
 #     retries=2,
 #     retry_delay=timedelta(seconds=15),
 #     dag=dag,
@@ -598,17 +593,42 @@ check_data_etl = PostgresOperator(
 
 postgres_to_pandas = PythonOperator(
     task_id="postgres_to_pandas",
-    python_callable=loading_data,
+    python_callable=data_from_postgres_to_pandas,
     op_kwargs={
         'postgres_conn_id': 'postgres_default',
-        # 'username': POSTGRES_USERNAME,
-        # 'password': POSTGRES_PASSWORD,
-        # 'host': POSTGRES_ADDRESS,
-        # 'port': POSTGRES_PORT,
         'dbname': POSTGRES_DBNAME,
         'schema_name': 'public_etl',
         'table_name': 'df_final_etl_no_outliers',
-        #'file_name': 'df_final_etl.csv'
+        'airflow_home': AIRFLOW_HOME,
+        'location_data': LOCATION_DATA,
+        'file_name': 'df_final_etl.csv'
+    },
+    dag=dag,
+)
+
+training_ML_model = PythonOperator(
+    task_id="training_ML_model",
+    python_callable=training_model,
+    op_kwargs={
+        'airflow_home': AIRFLOW_HOME,
+        'location_data': LOCATION_DATA,
+        'file_name': 'df_final_etl.csv',
+        'location_model': LOCATION_MODEL,
+        'model_name': 'model'
+    },
+    dag=dag,
+)
+
+predicting_with_model = PythonOperator(
+    task_id="predicting_with_model",
+    python_callable=predicting,
+    op_kwargs={
+        'airflow_home': AIRFLOW_HOME,
+        'location_model': LOCATION_MODEL,
+        'model_name': 'model',
+        'location_prediction': LOCATION_PREDICT,
+        'file_name_to_predict': 'data_to_predict.csv',
+        'file_name_predicted': 'predicted.csv'
     },
     dag=dag,
 )
@@ -707,4 +727,7 @@ check_data_ready_for_ml >> create_public_etl_schema
 create_public_etl_schema >> etl_pipeline >> check_data_etl
 
 # ML process
-check_data_etl >> postgres_to_pandas
+check_data_etl >> postgres_to_pandas >> training_ML_model
+
+# Predicting with ML model
+training_ML_model >> predicting_with_model

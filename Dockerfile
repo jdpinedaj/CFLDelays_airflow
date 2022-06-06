@@ -7,7 +7,13 @@
 
 ###############################
 FROM apache/airflow:2.3.1
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get -y install curl
+RUN apt-get install libgomp1
 
+# Changing the default user to airflow to run airflow
+USER airflow
 # Generating necessary environment variables
 ENV AIRFLOW_HOME=/opt/airflow
 ENV C_FORCE_ROOT="true"
