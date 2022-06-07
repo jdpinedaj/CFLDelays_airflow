@@ -42,5 +42,9 @@ dags/scripts/*
 
 # others
 .idea
+.env
+Pipfile.lock
+Pipfile
+
 #requirements.txt
 examples/*
