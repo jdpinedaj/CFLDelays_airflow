@@ -2,17 +2,17 @@ from pycaret.regression import load_model, predict_model
 import pandas as pd
 
 
-def predicting(airflow_home, location_prediction, model, file_name_to_predict,
-               file_name_predicted):
+def predicting(airflow_home, location_prediction, location_model, model_name,
+               file_name_to_predict, file_name_predicted):
     """
     Evaluate the model using the training data. It also logs the metadata of the ML pipeline.
     :return:
     """
     df = _get_data_to_predict(airflow_home, location_prediction,
                               file_name_to_predict)
-    _loading_model(airflow_home, location_model, model_name)
-    _predicting(model, df, airflow_home, location_prediction,
-                file_name_predicted)
+    model = _loading_model(airflow_home, location_model, model_name)
+    _predicting_with_model(model, df, airflow_home, location_prediction,
+                           file_name_predicted)
 
 
 def _get_data_to_predict(airflow_home, location_prediction,
@@ -41,8 +41,8 @@ def _loading_model(airflow_home, location_model, model_name):
 
 
 # Adding a custom metric
-def _predicting(model, df, airflow_home, location_prediction,
-                file_name_predicted):
+def _predicting_with_model(model, df, airflow_home, location_prediction,
+                           file_name_predicted):
     """
     Predicting arrival_delay.
     :return:
