@@ -45,6 +45,7 @@ dags/scripts/*
 .env
 Pipfile.lock
 Pipfile
+document/
 
 #requirements.txt
 examples/*

@@ -34,6 +34,7 @@ default_args = {
 }
 
 # It is possible to store all those variables as "Variables" within airflow
+#SCHEDULE_INTERVAL = '00 11 * * *'
 SCHEDULE_INTERVAL = '@once'
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME')
 LOCATION_DATA = '/dags/data/'
@@ -55,7 +56,7 @@ POSTGRES_DBNAME = 'cfl'
 #                   port=POSTGRES_PORT)
 
 # Additional variables
-date = datetime.now().strftime("%Y_%m_%d")
+#date = datetime.now().strftime("%Y_%m_%d")
 
 # Functions
 
@@ -67,9 +68,9 @@ date = datetime.now().strftime("%Y_%m_%d")
 ##! 3. Instantiate a DAG
 #######################
 
-dag = DAG(dag_id='CFL_delay_prediction_v1',
+dag = DAG(dag_id='CFL_delay_prediction_v2',
           description='CFL_delay_prediction',
-          start_date=datetime.now(),
+          start_date=datetime(2022, 6, 9),
           schedule_interval=SCHEDULE_INTERVAL,
           concurrency=5,
           max_active_runs=1,
@@ -86,36 +87,20 @@ start_pipeline = DummyOperator(
     dag=dag,
 )
 
-creating_postgres_tables = PythonOperator(
-    task_id='creating_postgres_tables',
-    python_callable=creating_empty_tables,
-    retries=2,
-    retry_delay=timedelta(seconds=15),
-    dag=dag,
-)
-
-check_installed_libraries = BashOperator(
-    task_id='check_installed_libraries',
-    bash_command="pip list",
-    retries=2,
-    retry_delay=timedelta(seconds=15),
-    dag=dag,
-)
-
 #? 4.2. Creating empty tables
-
-create_public_schema = PostgresOperator(
-    task_id="create_public_schema",
-    postgres_conn_id='postgres_default',
-    sql='sql/create_schema.sql',
-    params={'schema_name': 'public'},
-    dag=dag,
-)
 
 with TaskGroup(
         'create_tables',
         dag=dag,
 ) as create_tables:
+
+    create_public_schema = PostgresOperator(
+        task_id="create_public_schema",
+        postgres_conn_id='postgres_default',
+        sql='sql/create_schema.sql',
+        params={'schema_name': 'public'},
+        dag=dag,
+    )
 
     create_incident_concerne_table = PostgresOperator(
         task_id="create_incident_concerne_table",
@@ -236,6 +221,16 @@ with TaskGroup(
         params={'table_name': 'cfl.public.stations_countries'},
         dag=dag,
     )
+
+    create_public_schema >> [
+        create_incident_concerne_table, create_incidents_table,
+        create_station_table, create_terminal_table, create_train_etape_table,
+        create_train_jalon_table, create_train_lot_table,
+        create_train_position_table, create_train_wagon_table,
+        create_train_table, create_wagon_capacite_table,
+        create_wagon_position_table, create_wagon_table,
+        create_wagon_modele_table, create_stations_countries_table
+    ]
 
 #? 4.3. Populating tables
 
@@ -378,29 +373,39 @@ with TaskGroup(
         dag=dag,
     )
 
-check_postgres_tables = PostgresOperator(
-    task_id='check_postgres_tables',
-    postgres_conn_id='postgres_default',
-    sql='sql/creation_tables/check_postgres_tables.sql',
-    params={'table_name': 'cfl.public.stations_countries'},
-    dag=dag,
-)
+    check_postgres_tables = PostgresOperator(
+        task_id='check_postgres_tables',
+        postgres_conn_id='postgres_default',
+        sql='sql/creation_tables/check_postgres_tables.sql',
+        params={'table_name': 'cfl.public.stations_countries'},
+        dag=dag,
+    )
+
+    [
+        populate_incident_concerne_table, populate_incidents_table,
+        populate_station_table, populate_terminal_table,
+        populate_train_etape_table, populate_train_jalon_table,
+        populate_train_lot_table, populate_train_position_table,
+        populate_train_wagon_table, populate_train_table,
+        populate_wagon_capacite_table, populate_wagon_position_table,
+        populate_wagon_table, populate_wagon_modele_table,
+        populate_stations_countries_table
+    ] >> check_postgres_tables
 
 #? 4.4. Preprocessing tables
-
-create_public_processed_schema = PostgresOperator(
-    task_id="create_public_processed_schema",
-    postgres_conn_id='postgres_default',
-    sql='sql/create_schema.sql',
-    params={'schema_name': 'public_processed'},
-    dag=dag,
-)
 
 with TaskGroup(
         'preprocessing_tables',
         dag=dag,
 ) as preprocessing_tables:
 
+    create_public_processed_schema = PostgresOperator(
+        task_id="create_public_processed_schema",
+        postgres_conn_id='postgres_default',
+        sql='sql/create_schema.sql',
+        params={'schema_name': 'public_processed'},
+        dag=dag,
+    )
     preprocess_incident_concerne_table = PostgresOperator(
         task_id="preprocess_incident_concerne_table",
         postgres_conn_id='postgres_default',
@@ -500,21 +505,27 @@ with TaskGroup(
         dag=dag,
     )
 
-#? 4.5. Joining tables - Creating incident_data, station_data, train_data and wagon_data tables
+    create_public_processed_schema >> [
+        preprocess_incident_concerne_table, preprocess_incidents_table,
+        preprocess_station_table, preprocess_train_etape_table,
+        preprocess_train_jalon_table, preprocess_train_lot_table,
+        preprocess_train_position_table, preprocess_train_table,
+        preprocess_stations_countries_table
+    ]
 
-joining_tables = PostgresOperator(
-    task_id="joining_tables",
-    postgres_conn_id='postgres_default',
-    sql='sql/joining_tables/joining_tables.sql',
-    dag=dag,
-)
-
-#? 4.6. Checking incident_data, station_data, train_data and wagon_data tables
+#? 4.5. Merging data - Creating incident_data, station_data, train_data and wagon_data tables and checking data
 
 with TaskGroup(
-        'checking_tables',
+        'merging_data',
         dag=dag,
-) as checking_tables:
+) as merging_data:
+
+    joining_tables = PostgresOperator(
+        task_id="joining_tables",
+        postgres_conn_id='postgres_default',
+        sql='sql/joining_tables/joining_tables.sql',
+        dag=dag,
+    )
 
     check_incident_data_table = PostgresOperator(
         task_id="check_incident_data_table",
@@ -548,85 +559,113 @@ with TaskGroup(
         dag=dag,
     )
 
-#? 4.7. Preparing dataset for ML
+    joining_tables >> [
+        check_incident_data_table, check_station_data_final_table,
+        check_train_data_final_table, check_wagon_data_table
+    ]
 
-create_public_ready_for_ml_schema = PostgresOperator(
-    task_id="create_public_ready_for_ml_schema",
-    postgres_conn_id='postgres_default',
-    sql='sql/create_schema.sql',
-    params={'schema_name': 'public_ready_for_ml'},
-    dag=dag,
-)
+#? 4.6. Preparing dataset for ML
 
-preparing_for_ml = PostgresOperator(
-    task_id="preparing_for_ml",
-    postgres_conn_id='postgres_default',
-    sql='sql/preparing_for_ml/preparing_for_ml.sql',
-    dag=dag,
-)
+with TaskGroup(
+        'data_for_ml',
+        dag=dag,
+) as data_for_ml:
 
-check_data_ready_for_ml = PostgresOperator(
-    task_id="check_data_ready_for_ml",
-    postgres_conn_id='postgres_default',
-    sql='sql/preparing_for_ml/checking_data_ready_for_ml.sql',
-    params={'table_name': 'cfl.public_ready_for_ML.df_final_for_ml'},
-    dag=dag,
-)
+    create_public_ready_for_ml_schema = PostgresOperator(
+        task_id="create_public_ready_for_ml_schema",
+        postgres_conn_id='postgres_default',
+        sql='sql/create_schema.sql',
+        params={'schema_name': 'public_ready_for_ml'},
+        dag=dag,
+    )
 
-#? 4.8. ETL process
+    preparing_for_ml = PostgresOperator(
+        task_id="preparing_for_ml",
+        postgres_conn_id='postgres_default',
+        sql='sql/preparing_for_ml/preparing_for_ml.sql',
+        dag=dag,
+    )
 
-create_public_etl_schema = PostgresOperator(
-    task_id="create_public_etl_schema",
-    postgres_conn_id='postgres_default',
-    sql='sql/create_schema.sql',
-    params={'schema_name': 'public_etl'},
-    dag=dag,
-)
+    check_data_ready_for_ml = PostgresOperator(
+        task_id="check_data_ready_for_ml",
+        postgres_conn_id='postgres_default',
+        sql='sql/preparing_for_ml/checking_data_ready_for_ml.sql',
+        params={'table_name': 'cfl.public_ready_for_ML.df_final_for_ml'},
+        dag=dag,
+    )
 
-etl_pipeline = PostgresOperator(
-    task_id="etl_pipeline",
-    postgres_conn_id='postgres_default',
-    sql='sql/etl_pipeline/etl.sql',
-    dag=dag,
-)
+    create_public_ready_for_ml_schema >> preparing_for_ml >> check_data_ready_for_ml
 
-check_data_etl = PostgresOperator(
-    task_id="check_data_etl",
-    postgres_conn_id='postgres_default',
-    sql='sql/etl_pipeline/checking_data_etl.sql',
-    params={'table_name': 'cfl.public_etl.df_final_etl'},
-    dag=dag,
-)
+#? 4.7. ETL process
 
-#? 4.9. ML process
+with TaskGroup(
+        'etl_process',
+        dag=dag,
+) as etl_process:
 
-postgres_to_pandas = PythonOperator(
-    task_id="postgres_to_pandas",
-    python_callable=data_from_postgres_to_pandas,
-    op_kwargs={
-        'postgres_conn_id': 'postgres_default',
-        'dbname': POSTGRES_DBNAME,
-        'schema_name': 'public_etl',
-        'table_name': 'df_final_etl_no_outliers',
-        'airflow_home': AIRFLOW_HOME,
-        'location_data': LOCATION_DATA,
-        'file_name': 'df_final_etl.csv'
-    },
-    dag=dag,
-)
+    create_public_etl_schema = PostgresOperator(
+        task_id="create_public_etl_schema",
+        postgres_conn_id='postgres_default',
+        sql='sql/create_schema.sql',
+        params={'schema_name': 'public_etl'},
+        dag=dag,
+    )
 
-training_ML_model = PythonOperator(
-    task_id="training_ML_model",
-    python_callable=training_model,
-    op_kwargs={
-        'airflow_home': AIRFLOW_HOME,
-        'location_data': LOCATION_DATA,
-        'file_name': 'df_final_etl.csv',
-        'location_model': LOCATION_MODEL,
-        'model_name': 'model'
-    },
-    dag=dag,
-)
+    etl_pipeline = PostgresOperator(
+        task_id="etl_pipeline",
+        postgres_conn_id='postgres_default',
+        sql='sql/etl_pipeline/etl.sql',
+        dag=dag,
+    )
+
+    check_data_etl = PostgresOperator(
+        task_id="check_data_etl",
+        postgres_conn_id='postgres_default',
+        sql='sql/etl_pipeline/checking_data_etl.sql',
+        params={'table_name': 'cfl.public_etl.df_final_etl'},
+        dag=dag,
+    )
+
+    create_public_etl_schema >> etl_pipeline >> check_data_etl
+
+#? 4.8. ML process
+
+with TaskGroup(
+        'ml_process',
+        dag=dag,
+) as ml_process:
+
+    postgres_to_pandas = PythonOperator(
+        task_id="postgres_to_pandas",
+        python_callable=data_from_postgres_to_pandas,
+        op_kwargs={
+            'postgres_conn_id': 'postgres_default',
+            'dbname': POSTGRES_DBNAME,
+            'schema_name': 'public_etl',
+            'table_name': 'df_final_etl_no_outliers',
+            'airflow_home': AIRFLOW_HOME,
+            'location_data': LOCATION_DATA,
+            'file_name': 'df_final_etl.csv'
+        },
+        dag=dag,
+    )
+
+    training_ML_model = PythonOperator(
+        task_id="training_ML_model",
+        python_callable=training_model,
+        op_kwargs={
+            'airflow_home': AIRFLOW_HOME,
+            'location_data': LOCATION_DATA,
+            'file_name': 'df_final_etl.csv',
+            'location_model': LOCATION_MODEL,
+            'model_name': 'model'
+        },
+        dag=dag,
+    )
+
+    postgres_to_pandas >> training_ML_model
+
+#? 4.9. Predicting
 
 predicting_with_model = PythonOperator(
     task_id="predicting_with_model",
@@ -647,11 +686,7 @@ predicting_with_model = PythonOperator(
 #######################
 
 # Starting pipeline
-start_pipeline >> creating_postgres_tables
-creating_postgres_tables >> check_installed_libraries
-
-# Creating postgres tables
-creating_postgres_tables >> create_public_schema >> create_tables
+start_pipeline >> create_tables
 
 # Populating postgres tables
 create_incident_concerne_table >> populate_incident_concerne_table
@@ -670,27 +705,20 @@ create_wagon_table >> populate_wagon_table
 create_wagon_modele_table >> populate_wagon_modele_table
 create_stations_countries_table >> populate_stations_countries_table
 
-# Checking postgres tables
-populate_tables >> check_postgres_tables
-
 # Preprocessing tables and storing them in public_processed schema
-check_postgres_tables >> create_public_processed_schema
-create_public_processed_schema >> preprocessing_tables
+populate_tables >> preprocessing_tables
 
 # Joining tables in order to create incident_data, station_data, train_data and wagon_data tables
-preprocessing_tables >> joining_tables
-joining_tables >> checking_tables
+preprocessing_tables >> merging_data
 
 # Preparing data to train ML models
-checking_tables >> create_public_ready_for_ml_schema
-create_public_ready_for_ml_schema >> preparing_for_ml >> check_data_ready_for_ml
+merging_data >> data_for_ml
 
 # ETL pipeline
-check_data_ready_for_ml >> create_public_etl_schema
-create_public_etl_schema >> etl_pipeline >> check_data_etl
+data_for_ml >> etl_process
 
 # ML process
-check_data_etl >> postgres_to_pandas >> training_ML_model
+etl_process >> ml_process
 
 # Predicting with ML model
-training_ML_model >> predicting_with_model
+ml_process >> predicting_with_model
