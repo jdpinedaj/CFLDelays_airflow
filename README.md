@@ -11,7 +11,7 @@ This quick-start guide will allow you to quickly start Airflow with CeleryExecut
 To deploy Airflow on Docker Compose, you should fetch docker-compose.yaml.
 
 ```
-curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.2.3/docker-compose.yaml'
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.3.2/docker-compose.yaml'
 ```
 
 In addition, please include the following element in the postgres service:
@@ -30,7 +30,15 @@ mkdir -p ./dags ./logs ./plugins
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
-### 3. Initialize the database
+### 3. Extending the image to use your requirements
+
+You can install python requirements to the airflow container (filling the Dockerfile with the appropriate instructions):
+
+```
+docker-compose build
+```
+
+### 4. Initialize the database
 
 On all operating systems, you need to run database migrations and create the first user account. To do it, run.
 
@@ -38,7 +46,7 @@ On all operating systems, you need to run database migrations and create the fir
 docker-compose up airflow-init -d
 ```
 
-### 4. Cleaning-up the environment
+### 5. Cleaning-up the environment
 
 The docker-compose we prepare is a “Quick-start” one. It is not intended to be used in production and it has a number of caveats - one of them being that the best way to recover from any problem is to clean it up and restart from the scratch.
 
@@ -49,7 +57,7 @@ The best way to do it is to:
 - re-download the docker-compose.yaml file
 - re-start following the instructions from the very beginning in this guide
 
-### 5. Running Airflow
+### 6. Running Airflow
 
 Now you can start all services:
 
@@ -57,11 +65,11 @@ Now you can start all services:
 docker-compose up -d
 ```
 
-### 6. Accessing the environment via a browser using the web interface
+### 7. Accessing the environment via a browser using the web interface
 
 Check http://localhost:8080
 
-### 7. Airflow connection and Postgres Operator
+### 8. Airflow connection and Postgres Operator
 
 In Airflow/Admin/Connections
 
@@ -72,26 +80,6 @@ In Airflow/Admin/Connections
 - Login: airflow
 - Password: airflow
 - Port: 5432
-
-### 8. Extending the Dockerfile
-
-You can install python requirements to the airflow container:
-
-```
-docker build . --tag extending_airflow:latest
-```
-
-In the docker-compose.yaml file change the image name:
-
-```
-image: ${AIRFLOW_IMAGE_NAME:-extending_airflow:latest}
-```
-
-And then, run:
-
-```
-docker-compose up -d --no-deps --build airflow-webserver airflow-scheduler
-```
 
 ### 9. Reseting Docker to start again
 

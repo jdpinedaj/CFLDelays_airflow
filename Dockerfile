@@ -1,4 +1,4 @@
-# FROM apache/airflow:2.2.3
+# FROM apache/airflow:2.3.2
 
 # # Installing libraries of Python
 # COPY requirements.txt /requirements.txt
@@ -6,7 +6,7 @@
 # RUN pip install --no-cache-dir --user -r /requirements.txt
 
 ###############################
-FROM apache/airflow:2.3.1
+FROM apache/airflow:2.3.2
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get -y install curl
