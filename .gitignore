@@ -46,6 +46,7 @@ dags/scripts/*
 Pipfile.lock
 Pipfile
 document/
+dbtTestsTutorial/
 
 #requirements.txt
 examples/*
