@@ -1,7 +1,7 @@
 # data
-data/*
-predict/*
-!predict/data_to_predict.csv
+dags/data/*
+dags/predict/*
+!dags/predict/data_to_predict.csv
 
 # notebooks
 notebooks/*
