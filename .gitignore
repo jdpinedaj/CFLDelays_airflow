@@ -1,5 +1,6 @@
 # data
 dags/data/*
+!dags/data/.gitkeep
 dags/predict/*
 !dags/predict/data_to_predict.csv
 
