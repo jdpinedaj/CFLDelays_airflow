@@ -1,0 +1,19 @@
+preparing:
+  train_data_file: "data/train_data_final.xlsx"
+  incident_concerne_file: "data/incident_concerne.xlsx"
+  incidents_file: "data/incidents.xlsx"
+  processed_path: "data"
+
+etl:
+  raw_data_file: "data/df_final_for_ml.csv"
+  processed_path: "data"
+
+train:
+  processed_train: "data/df_processed_ml.csv"
+  model_path: "model/lightgbm_regression"
+
+predict:
+  model_path: "model/lightgbm_regression"
+  processed_test: "predict/data_to_predict.csv"
+  predicted_file: "predict/data_predicted.csv"
+  export_result: True

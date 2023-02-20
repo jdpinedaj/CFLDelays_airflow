@@ -14,6 +14,7 @@ from custom_operators.ExcelToPostgresOperator import ExcelToPostgresOperator
 from scripts.loading_data import data_from_postgres_to_pandas
 from scripts.training import training_model
 from scripts.prediction import predicting
+from airflow.decorators import dag, task
 
 import os
 import pandas as pd
