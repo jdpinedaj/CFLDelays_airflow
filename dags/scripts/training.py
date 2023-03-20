@@ -5,8 +5,7 @@ from sklearn.metrics import mean_squared_error
 import logging
 
 
-def training_model(airflow_home, location_data, file_name, location_model,
-                   model_name):
+def training_model(airflow_home, location_data, file_name, location_model, model_name):
     """
     Get data, build pipeline, train the model.
     :return:
@@ -35,24 +34,22 @@ def _build_ml_pipeline(df):
     # Set up
     regressor = setup(
         data=df,
-        target='arrival_delay',
+        target="arrival_delay",
         session_id=42,
         normalize=True,
         combine_rare_levels=True,
         rare_level_threshold=0.05,
         use_gpu=True,
         log_experiment=False,  # True for MLFlow
-        experiment_name='cfl_reg',
-        silent=True)
+        experiment_name="cfl_reg",
+        silent=True,
+    )
 
     # Adding an additional metric
-    add_metric('rMSE',
-               'relative_MSE',
-               _calculate_rMSE,
-               greater_is_better=False)
+    add_metric("rMSE", "relative_MSE", _calculate_rMSE, greater_is_better=False)
 
     # Training model
-    lightgbm = create_model(estimator='lightgbm', verbose=False)
+    lightgbm = create_model(estimator="lightgbm", verbose=False)
     model = finalize_model(lightgbm)
     return model
 
@@ -64,7 +61,7 @@ def _evaluate_model(model):
     """
     # Evaluate the model
     predictions = predict_model(model)
-    logging.info('Predictions: ' + str(predictions))
+    logging.info("Predictions: " + str(predictions))
     logging.info(f"Metrics:\n {pull(model)}")
 
 
@@ -81,4 +78,6 @@ def _calculate_rMSE(y, y_pred):
     """
     Calculating the rMSE in percentage.
     """
-    return mean_squared_error(y_pred, y) / np.var(y)
+    mse = mean_squared_error(y_pred, y)
+    rmse = np.sqrt(mse)
+    return rmse / np.mean(y)

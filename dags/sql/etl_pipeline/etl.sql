@@ -320,7 +320,8 @@ FROM (
                 )
                 OR distance_between_control_stations > (
                     q3_distance_between_control_stations + 1.5 * iqr_distance_between_control_stations
-                ) THEN NULL
+                ) -- or distance_between_control_stations > 150
+                OR distance_between_control_stations > 150 THEN NULL
                 ELSE distance_between_control_stations
             END AS distance_between_control_stations,
             CASE
